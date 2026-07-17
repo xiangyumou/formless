@@ -1,6 +1,6 @@
 {
-  "name": "formless-dev",
-  "description": "Development marketplace for the Formless workflow",
+  "name": "formless",
+  "description": "Marketplace for the Formless workflow",
   "owner": {
     "name": "xiangyumou"
   },

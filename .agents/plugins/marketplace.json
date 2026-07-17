@@ -1,7 +1,7 @@
 {
-  "name": "formless-dev",
+  "name": "formless",
   "interface": {
-    "displayName": "Formless Dev"
+    "displayName": "Formless"
   },
   "plugins": [
     {

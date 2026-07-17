@@ -73,7 +73,7 @@ Register this repository as a marketplace and install the plugin:
 
 ```bash
 /plugin marketplace add xiangyumou/formless
-/plugin install formless@formless-dev
+/plugin install formless@formless
 ```
 
 ### Codex
