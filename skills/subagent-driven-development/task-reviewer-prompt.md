@@ -5,7 +5,7 @@ reads the task's diff once and returns two verdicts: spec compliance and
 code quality.
 
 **Purpose:** Verify one task's implementation matches its requirements (nothing
-more, nothing less) and is well-built (clean, tested, maintainable)
+more, nothing less) and is well-built (clean, verified, maintainable)
 
 ```
 Subagent (general-purpose):
@@ -61,19 +61,19 @@ Subagent (general-purpose):
     implementer grading their own work. Judge the code on its merits — a
     stated rationale never downgrades a finding's severity.
 
-    ## Tests
+    ## Verification
 
-    The implementer already ran the tests and reported results with TDD
-    evidence for exactly this code. Do not re-run the suite to confirm their
-    report. Run a test only when reading the code raises a specific doubt
-    that no existing run answers — and then a focused test, never a
-    package-wide suite, race detector run, or repeated/high-count loop. If
-    heavy validation seems warranted, recommend it in your report instead of
-    running it. If you cannot run commands in this environment, name the
-    test you would run.
+    The implementer already followed the plan's verification strategy and
+    reported results for exactly this code. Do not repeat the same checks just
+    to confirm the report. Run a focused check only when reading the code raises
+    a concrete doubt that the report does not answer. If heavier validation
+    seems warranted, recommend it instead of running it.
 
-    Warnings or other noise in the implementer's reported test output are
-    findings — test output should be pristine.
+    Judge whether the chosen verification can catch a realistic failure of the
+    required behavior. Do not request tests solely because production code
+    changed. A proposed test must protect meaningful behavior, fail usefully for
+    a plausible regression, remain stable across implementation changes, and
+    justify its maintenance cost.
 
     ## Part 1: Spec Compliance
 
@@ -98,13 +98,14 @@ Subagent (general-purpose):
     - DRY without premature abstraction?
     - Edge cases handled?
 
-    **Tests:**
-    - Do the new and changed tests verify real behavior, not mocks?
-    - Are the task's edge cases covered?
+    **Verification quality:**
+    - Would the reported evidence detect a realistic failure of the task?
+    - Does each new or changed test justify its maintenance cost?
+    - Are important failure modes addressed by tests or another suitable check?
 
     **Structure:**
     - Does each file have one clear responsibility with a well-defined interface?
-    - Are units decomposed so they can be understood and tested independently?
+    - Are units decomposed so they can be understood and verified independently?
     - Is the implementation following the file structure from the plan?
     - Did this change create new files that are already large, or
       significantly grow existing files? (Don't flag pre-existing file

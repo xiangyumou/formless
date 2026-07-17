@@ -1,6 +1,6 @@
 {
   "name": "superpowers",
-  "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques",
+  "description": "Planning, model handoff, focused verification, and subagent review workflows",
   "version": "6.1.1",
   "contextFileName": "GEMINI.md"
 }

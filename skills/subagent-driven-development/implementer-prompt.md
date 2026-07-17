@@ -33,7 +33,9 @@ Subagent (general-purpose):
 
     Once you're clear on requirements:
     1. Implement exactly what the task specifies
-    2. Write tests (following TDD if task says to)
+    2. Follow the task's verification strategy. Add a test only when it protects
+       meaningful behavior, would catch a plausible regression for a useful
+       reason, and is worth its maintenance cost.
     3. Verify implementation works
     4. Commit your work
     5. Self-review (see below)
@@ -44,8 +46,9 @@ Subagent (general-purpose):
     **While you work:** If you encounter something unexpected or unclear, **ask questions**.
     It's always OK to pause and clarify. Don't guess or make assumptions.
 
-    While iterating, run the focused test for what you're changing; run the
-    full suite once before committing, not after every edit.
+    While iterating, use the narrowest verification that gives useful feedback.
+    Run broader checks once before handoff when the plan or repository requires
+    them, not after every edit.
 
     ## Code Organization
 
@@ -96,28 +99,26 @@ Subagent (general-purpose):
     - Did I only build what was requested?
     - Did I follow existing patterns in the codebase?
 
-    **Testing:**
-    - Do tests actually verify behavior (not just mock behavior)?
-    - Did I follow TDD if required?
-    - Are tests comprehensive?
-    - Is the test output pristine (no stray warnings or noise)?
+    **Verification:**
+    - Did I follow the plan's verification strategy?
+    - Would each new test catch a plausible regression for a useful reason?
+    - Is each assertion stable enough to justify its maintenance cost?
+    - Is command output free of relevant errors and warnings?
 
     If you find issues during self-review, fix them now before reporting.
 
     ## After Review Findings
 
-    If a reviewer finds issues and you fix them, re-run the tests that cover
-    the amended code and append the results to your report file. Reviewers
-    will not re-run tests for you — your report is the test evidence.
+    If a reviewer finds issues and you fix them, repeat the focused verification
+    covering the amended code and append the results to your report file.
+    Reviewers will not repeat checks for you; your report is the evidence.
 
     ## Report Format
 
     Write your full report to [REPORT_FILE]:
     - What you implemented (or what you attempted, if blocked)
-    - What you tested and test results
-    - **TDD Evidence** (if TDD was required for this task):
-      - RED: command run, relevant failing output before implementation, and why the failure was expected
-      - GREEN: command run and relevant passing output after implementation
+    - Verification performed and results
+    - Tests added, if any, and the behavior they protect
     - Files changed
     - Self-review findings (if any)
     - Any issues or concerns
@@ -126,7 +127,7 @@ Subagent (general-purpose):
     report file):
     - **Status:** DONE | DONE_WITH_CONCERNS | BLOCKED | NEEDS_CONTEXT
     - Commits created (short SHA + subject)
-    - One-line test summary (e.g. "14/14 passing, output pristine")
+    - One-line verification summary
     - Your concerns, if any
     - The report file path
 

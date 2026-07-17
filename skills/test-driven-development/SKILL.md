@@ -1,6 +1,6 @@
 ---
 name: test-driven-development
-description: Use when implementing any feature or bugfix, before writing implementation code
+description: Use when the user explicitly requests strict test-driven development or the approved plan explicitly requires a red-green-refactor cycle
 ---
 
 # Test-Driven Development (TDD)

@@ -15,13 +15,16 @@ Give your agent Superpowers: [Claude Code](#claude-code), [Antigravity](#antigra
 
 ## How it works
 
-It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it *doesn't* just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do. 
+For obvious localized work, the agent makes the change directly and verifies it
+with proportionate evidence. For complex work or a handoff to another model, it
+writes a plan that preserves architectural decisions, interfaces, constraints,
+and escalation points without fragmenting the work into ceremonial steps.
 
-Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest. 
-
-After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY. 
-
-Next up, once you say "go", it launches a *subagent-driven-development* process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward. It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together.
+Once you say "go", *subagent-driven-development* assigns each coherent task to
+a fresh implementer and reviews the result before continuing. The plan decides
+the appropriate verification strategy. New tests are added when they protect
+meaningful behavior and can catch a plausible regression, not merely because a
+file changed.
 
 There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.
 
@@ -187,21 +190,14 @@ The Pi package loads the Superpowers skills and a small extension that injects t
 
 ## The Basic Workflow
 
-1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
+1. **Direct execution** - Make clear, localized changes without creating a plan.
 
-2. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
+2. **writing-plans** - For complex work or model handoff, define a small number of coherent deliverables with exact constraints, interfaces, and proportionate verification.
 
-3. **writing-plans** - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.
+3. **subagent-driven-development** - Dispatch a fresh implementer per planned task and retain independent review without splitting implementation into tiny workflow steps.
 
-4. **subagent-driven-development** or **executing-plans** - Activates with plan. Dispatches fresh subagent per task with two-stage review (spec compliance, then code quality), or executes in batches with human checkpoints.
-
-5. **test-driven-development** - Activates during implementation. Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit. Deletes code written before tests.
-
-6. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
-
-7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.
-
-**The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
+Other skills remain available for specialized situations or explicit requests;
+they are not mandatory stages of every change.
 
 ## What's Inside
 
@@ -231,7 +227,7 @@ The Pi package loads the Superpowers skills and a small extension that injects t
 
 ## Philosophy
 
-- **Test-Driven Development** - Write tests first, always
+- **Valuable verification** - Add tests when they protect meaningful behavior; otherwise use the evidence best suited to the actual risk
 - **Systematic over ad-hoc** - Process over guessing
 - **Complexity reduction** - Simplicity as primary goal
 - **Evidence over claims** - Verify before declaring success
