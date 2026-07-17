@@ -1,20 +1,20 @@
 {
-  "name": "superpowers",
-  "description": "Planning, model handoff, focused verification, and subagent review workflows for Claude Code",
-  "version": "6.1.1",
+  "name": "formless",
+  "description": "Give ideas form through design, planning, focused execution, verification, and review",
+  "version": "7.0.0",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "xiangyumou"
   },
-  "homepage": "https://github.com/obra/superpowers",
-  "repository": "https://github.com/obra/superpowers",
+  "homepage": "https://github.com/xiangyumou/formless",
+  "repository": "https://github.com/xiangyumou/formless",
   "license": "MIT",
   "keywords": [
+    "formless",
     "skills",
     "planning",
     "subagents",
     "collaboration",
-    "best-practices",
+    "code-review",
     "workflows"
   ]
 }

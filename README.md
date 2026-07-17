@@ -1,119 +1,116 @@
-# Superpowers
+# Formless
 
-Superpowers is a lightweight software development workflow for coding agents,
-built from five composable skills.
+*Raise the quill. Give form to what is not yet formed.*
 
-## Quickstart
+Formless is a compact software-development workflow for coding agents. Five
+composable skills carry work from an unresolved idea to reviewed
+implementation without imposing process where a direct change is enough.
 
-Give your agent Superpowers: [Claude Code](#claude-code), [Codex App](#codex-app), or [Codex CLI](#codex-cli).
+## The Five Movements
 
-## How it works
+### 1. Feder heben · Raise the quill
 
-For obvious localized work, the agent makes the change directly and verifies it
-with proportionate evidence. For complex work or a handoff to another model, it
-writes a plan that preserves architectural decisions, interfaces, constraints,
-and escalation points without fragmenting the work into ceremonial steps.
+**Entry and workflow selection**
 
-Once you say "go", *subagent-driven-development* assigns each coherent task to
-a fresh implementer and reviews the result before continuing. The plan decides
-the appropriate verification strategy. New tests are added when they protect
-meaningful behavior and can catch a plausible regression, not merely because a
-file changed.
+The quill pauses above the page. `feder-heben` reads the shape of the request
+and selects the smallest workflow that adds material value. Clear, localized
+work proceeds directly.
 
-Because the skills trigger automatically, you don't need to select one for every
-request.
+### 2. Worte fangen · Catch the words
+
+**Brainstorming and design**
+
+An idea is still a ghost until its consequential choices have names.
+`worte-fangen` resolves requirements, design decisions, and architectural
+trade-offs with the user before implementation begins.
+
+### 3. Sätze meißeln · Chisel the sentences
+
+**Implementation planning and model handoff**
+
+`saetze-meisseln` turns approved intent into a durable implementation plan. It
+records boundaries, interfaces, constraints, verification, and escalation
+points without fragmenting coherent work into ceremonial steps.
+
+### 4. Das Blatt küssen · Kiss the page
+
+**Subagent-driven development**
+
+The first touch turns possibility into code. `das-blatt-kuessen` gives each
+coherent plan task to a fresh implementer, checks the resulting evidence, and
+uses independent task and final review before declaring the work complete.
+
+### 5. Der Zeile folgen · Follow the line
+
+**Direct plan execution**
+
+`der-zeile-folgen` follows a written plan inline when subagents are unavailable
+or unwanted. It executes continuously, preserves user changes, and verifies in
+proportion to actual risk.
+
+## How It Works
+
+Formless does not require a workflow for every request. The entry skill chooses
+among three paths:
+
+1. Make an obvious localized change directly and verify it.
+2. Catch unresolved decisions, then chisel a plan when coordination or handoff
+   warrants one.
+3. Execute an existing plan with fresh subagents or follow it directly.
+
+Plans preserve decisions that should not be rediscovered. Tests are added when
+they protect meaningful behavior and can catch a plausible regression;
+otherwise the agent uses the most direct relevant evidence.
 
 ## Installation
 
-Installation differs by harness. If you use more than one, install Superpowers separately for each one.
+Installation is harness-specific. Install Formless separately in each coding
+agent where you want its skills to be available.
 
 ### Claude Code
 
-Superpowers is available via the [official Claude plugin marketplace](https://claude.com/plugins/superpowers)
+Register this repository as a marketplace and install the plugin:
 
-#### Official Marketplace
+```bash
+/plugin marketplace add xiangyumou/formless
+/plugin install formless@formless-dev
+```
 
-- Install the plugin from Anthropic's official marketplace:
+### Codex
 
-  ```bash
-  /plugin install superpowers@claude-plugins-official
-  ```
+Formless includes a Codex plugin manifest and marketplace metadata. Add the
+repository through the Codex plugin interface, then select **Formless** from the
+Developer Tools category.
 
-#### Superpowers Marketplace
+Subagent-driven execution requires Codex multi-agent support:
 
-The Superpowers marketplace provides Superpowers and some other related plugins for Claude Code.
+```toml
+[features]
+multi_agent = true
+```
 
-- Register the marketplace:
+## Runtime Artifacts
 
-  ```bash
-  /plugin marketplace add obra/superpowers-marketplace
-  ```
+- Approved designs: `docs/formless/specs/`
+- Implementation plans: `docs/formless/plans/`
+- Subagent execution state: `.formless/sdd/`
 
-- Install the plugin from this marketplace:
+## Principles
 
-  ```bash
-  /plugin install superpowers@superpowers-marketplace
-  ```
+- **Process only when it pays for itself** — direct work stays direct.
+- **Decisions survive handoff** — plans preserve judgment, not busywork.
+- **Evidence over claims** — completion requires relevant verification.
+- **Coherent units of work** — implementation, verification, and review stay
+  aligned around useful deliverables.
+- **Complexity reduction** — the workflow should leave the system simpler than
+  it found it.
 
-### Codex App
+## Lineage
 
-Superpowers is available via the [official Codex plugin marketplace](https://github.com/openai/plugins).
-
-- In the Codex app, click on Plugins in the sidebar.
-- You should see `Superpowers` in the Coding section.
-- Click the `+` next to Superpowers and follow the prompts.
-
-### Codex CLI
-
-Superpowers is available via the [official Codex plugin marketplace](https://github.com/openai/plugins).
-
-- Open the plugin search interface:
-
-  ```bash
-  /plugins
-  ```
-
-- Search for Superpowers:
-
-  ```bash
-  superpowers
-  ```
-
-- Select `Install Plugin`.
-
-## The Basic Workflow
-
-1. **Direct execution** - Make clear, localized changes without creating a plan.
-
-2. **brainstorming** - Resolve meaningful requirements or design choices when the direction is not yet clear.
-
-3. **writing-plans** - For complex work or model handoff, define a small number of coherent deliverables with exact constraints, interfaces, and proportionate verification.
-
-4. **subagent-driven-development** - Dispatch a fresh implementer per planned task and retain independent task and final review.
-
-5. **executing-plans** - Execute a written plan inline when subagents are unavailable or not desired.
-
-## What's Inside
-
-### Skills Library
-
-- **using-superpowers** - Lightweight workflow selection and platform bootstrap
-- **brainstorming** - Resolve requirements and design trade-offs
-- **writing-plans** - Create implementation handoffs with coherent task boundaries
-- **subagent-driven-development** - Execute with fresh implementers, task review, and final review
-- **executing-plans** - Execute plans inline without subagents
-
-## Philosophy
-
-- **Valuable verification** - Add tests when they protect meaningful behavior; otherwise use the evidence best suited to the actual risk
-- **Systematic when needed** - Use process where it reduces meaningful risk
-- **Complexity reduction** - Simplicity as primary goal
-- **Evidence over claims** - Verify before declaring success
-
-## Updating
-
-Superpowers updates are somewhat coding-agent dependent, but are often automatic.
+Formless is a poetic reimagining of the Superpowers agent workflow created by
+Jesse Vincent and contributors. The original copyright and MIT license are
+preserved in [LICENSE](LICENSE).
 
 ## License
 
-MIT License - see LICENSE file for details
+MIT

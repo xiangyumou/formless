@@ -1,9 +1,12 @@
 ---
-name: subagent-driven-development
-description: Use when executing an implementation plan with independent, reviewable tasks in the current session
+name: das-blatt-kuessen
+description: Use for subagent-driven development when executing an implementation plan with independent, reviewable tasks in the current session
 ---
 
-# Subagent-Driven Development
+# Das Blatt küssen
+
+Let the quill touch the blank page. Execute a written plan through fresh
+subagents, turning each coherent task into reviewed code.
 
 Execute a written plan with a fresh implementer for each coherent task, an
 independent task review after each implementation, and one final review across
@@ -35,7 +38,7 @@ Use one implementer dispatch per plan task. Do not split a coherent plan task
 into separate dispatches for testing, implementation, documentation, or
 committing.
 
-Track durable progress in `.superpowers/sdd/progress.md`. Resume from the first
+Track durable progress in `.formless/sdd/progress.md`. Resume from the first
 task not recorded as complete; trust the ledger and git history after context
 compaction.
 

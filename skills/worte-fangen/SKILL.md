@@ -1,17 +1,20 @@
 ---
-name: brainstorming
-description: Use when a proposed feature or behavior change has unresolved requirements, meaningful design choices, or architectural trade-offs that need user input before implementation
+name: worte-fangen
+description: Use for brainstorming when a proposed feature or behavior change has unresolved requirements, meaningful design choices, or architectural trade-offs that need user input before implementation
 ---
 
-# Brainstorming Ideas Into Designs
+# Worte fangen
 
-Turn an ambiguous idea into an approved design. Brainstorming is for decisions,
-not for adding ceremony before an already clear change.
+Catch the words before they disappear. Turn an unformed idea into an approved
+design by giving its important choices precise language.
+
+This workflow is for decisions, not for adding ceremony before an already clear
+change.
 
 ## Scope Gate
 
 - If intent, behavior, constraints, and implementation direction are already
-  clear, do not run this workflow. Proceed directly or use `writing-plans` when
+  clear, do not run this workflow. Proceed directly or use `saetze-meisseln` when
   the work still needs a multi-task handoff.
 - If consequential choices remain, explore them before implementation.
 - If only one small point is unclear, ask that question directly rather than
@@ -27,10 +30,10 @@ not for adding ceremony before an already clear change.
 4. Present the design at a depth proportional to its complexity and obtain user
    approval for consequential decisions.
 5. For a substantial design, write the approved spec to
-   `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`. For a small design,
+   `docs/formless/specs/YYYY-MM-DD-<topic>-design.md`. For a small design,
    the approved conversation is sufficient unless the user requests a file.
 6. Self-review for contradictions, placeholders, scope creep, and ambiguity.
-7. Use `superpowers:writing-plans` only when implementation needs a multi-task
+7. Use `formless:saetze-meisseln` only when implementation needs a multi-task
    handoff. Otherwise proceed with the direct change.
 
 Do not commit the spec, start implementation, or invoke another workflow merely

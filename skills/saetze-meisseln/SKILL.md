@@ -1,11 +1,14 @@
 ---
-name: writing-plans
-description: Use when a task is complex enough to require a multi-step implementation handoff, or when the user explicitly asks for an implementation plan
+name: saetze-meisseln
+description: Use for implementation planning when a task is complex enough to require a multi-step handoff, or when the user explicitly asks for a written implementation plan
 ---
 
-# Writing Plans
+# Sätze meißeln
 
 ## Overview
+
+Chisel fluid thought into durable sentences: write an implementation plan that
+another engineer or model can execute without the conversation that shaped it.
 
 Write implementation plans for another engineer or model to execute with little
 conversation context. Preserve decisions that require judgment; leave
@@ -86,7 +89,7 @@ was made. Tests are durable behavior checks, not a duplicate change log.
 
 ## Plan Format
 
-Save plans to `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md` unless the
+Save plans to `docs/formless/plans/YYYY-MM-DD-<feature-name>.md` unless the
 user requests another location.
 
 ```markdown
@@ -136,6 +139,6 @@ Before handoff, check:
 5. A weaker implementer can distinguish mechanical work from decisions that
    require escalation.
 
-Then offer execution with `superpowers:subagent-driven-development` when
+Then offer execution with `formless:das-blatt-kuessen` when
 subagents are available. Do not require a separate execution workflow for a
 direct change.

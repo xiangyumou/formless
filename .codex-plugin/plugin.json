@@ -1,32 +1,29 @@
 {
-  "name": "superpowers",
-  "version": "6.1.1",
-  "description": "An agentic workflow for implementation planning, model handoff, focused verification, and subagent review.",
+  "name": "formless",
+  "version": "7.0.0",
+  "description": "A compact agentic workflow that gives form to ideas through design, planning, execution, verification, and review.",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com",
-    "url": "https://github.com/obra"
+    "name": "xiangyumou",
+    "url": "https://github.com/xiangyumou"
   },
-  "homepage": "https://github.com/obra/superpowers",
-  "repository": "https://github.com/obra/superpowers",
+  "homepage": "https://github.com/xiangyumou/formless",
+  "repository": "https://github.com/xiangyumou/formless",
   "license": "MIT",
   "keywords": [
+    "formless",
     "brainstorming",
-    "subagent-driven-development",
-    "skills",
-    "planning",
+    "implementation-planning",
     "model-handoff",
-    "subagents",
+    "subagent-development",
     "code-review",
     "workflow"
   ],
   "skills": "./skills/",
-  "hooks": {},
   "interface": {
-    "displayName": "Superpowers",
-    "shortDescription": "Planning, model handoff, verification, and review workflows",
-    "longDescription": "Use Superpowers to make direct changes when work is simple, write durable implementation plans when work is complex, and execute those plans with fresh subagents and independent review.",
-    "developerName": "Jesse Vincent",
+    "displayName": "Formless",
+    "shortDescription": "Give ideas form through planning, execution, and review",
+    "longDescription": "Raise the quill with Formless: resolve consequential choices, write durable implementation plans, and execute them directly or through fresh subagents with independent review.",
+    "developerName": "xiangyumou",
     "category": "Developer Tools",
     "capabilities": [
       "Interactive",
@@ -34,10 +31,10 @@
       "Write"
     ],
     "defaultPrompt": [
-      "I've got an idea for something I'd like to build.",
-      "Let's add a feature to this project."
+      "Help me give shape to an idea for this project.",
+      "Plan and implement this feature with focused review."
     ],
-    "websiteURL": "https://github.com/obra/superpowers",
+    "websiteURL": "https://github.com/xiangyumou/formless",
     "privacyPolicyURL": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
     "termsOfServiceURL": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
     "brandColor": "#F59E0B",

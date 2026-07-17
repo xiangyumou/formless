@@ -1,19 +1,17 @@
 {
-  "name": "superpowers-dev",
-  "description": "Development marketplace for Superpowers core skills library",
+  "name": "formless-dev",
+  "description": "Development marketplace for the Formless workflow",
   "owner": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "xiangyumou"
   },
   "plugins": [
     {
-      "name": "superpowers",
-      "description": "A lightweight workflow for direct changes, planning, model handoff, implementation, and review",
-      "version": "6.1.1",
+      "name": "formless",
+      "description": "A compact workflow for design, planning, model handoff, implementation, and review",
+      "version": "7.0.0",
       "source": "./",
       "author": {
-        "name": "Jesse Vincent",
-        "email": "jesse@fsck.com"
+        "name": "xiangyumou"
       }
     }
   ]

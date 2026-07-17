@@ -1,9 +1,12 @@
 ---
-name: executing-plans
-description: Use when executing a written implementation plan without subagents or in a separate execution session
+name: der-zeile-folgen
+description: Use for direct plan execution when following a written implementation plan without subagents or in a separate execution session
 ---
 
-# Executing Plans
+# Der Zeile folgen
+
+Follow the line already set down. Execute a written implementation plan
+directly, one coherent deliverable at a time.
 
 Execute a written plan directly when subagent-driven development is unavailable
 or the user chooses inline execution.
@@ -46,4 +49,4 @@ push, create a PR, delete a branch, remove a worktree, or discard changes unless
 the user explicitly requests it.
 
 When subagents are available and the user wants independent review per task,
-use `superpowers:subagent-driven-development` instead.
+use `formless:das-blatt-kuessen` instead.

@@ -7,7 +7,7 @@ Add to your Codex config (`~/.codex/config.toml`):
 multi_agent = true
 ```
 
-This enables `spawn_agent`, `wait_agent`, and `close_agent` for `subagent-driven-development`. Close implementer and reviewer subagents when they have finished their work.
+This enables `spawn_agent`, `wait_agent`, and `close_agent` for `das-blatt-kuessen`. Close implementer and reviewer subagents when they have finished their work.
 
 ## Environment Detection
 
@@ -23,7 +23,7 @@ BRANCH=$(git branch --show-current)
 - `GIT_DIR != GIT_COMMON` → already in a linked worktree (skip creation)
 - `BRANCH` empty → detached HEAD (cannot branch/push/PR from sandbox)
 
-See `subagent-driven-development` for how the integrated workspace preparation
+See `das-blatt-kuessen` for how the integrated workspace preparation
 uses these signals.
 
 ## Codex App Finishing
