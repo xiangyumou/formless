@@ -1,12 +1,12 @@
 ---
-name: der-zeile-folgen
+name: zeile-gehen
 description: Use for direct plan execution when following a written implementation plan without subagents or in a separate execution session
 ---
 
-# Der Zeile folgen
+# Zeile gehen
 
-Follow the line already set down. Execute a written implementation plan
-directly, one coherent deliverable at a time.
+Walk the line already set down. Execute a written implementation plan directly,
+one coherent deliverable at a time.
 
 Execute a written plan directly when subagent-driven development is unavailable
 or the user chooses inline execution.
@@ -49,4 +49,4 @@ push, create a PR, delete a branch, remove a worktree, or discard changes unless
 the user explicitly requests it.
 
 When subagents are available and the user wants independent review per task,
-use `formless:das-blatt-kuessen` instead.
+use `formless:blatt-kuessen` instead.

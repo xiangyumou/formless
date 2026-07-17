@@ -24,27 +24,27 @@ An idea is still a ghost until its consequential choices have names.
 `worte-fangen` resolves requirements, design decisions, and architectural
 trade-offs with the user before implementation begins.
 
-### 3. Sätze meißeln · Chisel the sentences
+### 3. Satz meisseln · Chisel the sentence
 
 **Implementation planning and model handoff**
 
-`saetze-meisseln` turns approved intent into a durable implementation plan. It
+`satz-meisseln` turns approved intent into a durable implementation plan. It
 records boundaries, interfaces, constraints, verification, and escalation
 points without fragmenting coherent work into ceremonial steps.
 
-### 4. Das Blatt küssen · Kiss the page
+### 4. Blatt kuessen · Kiss the page
 
 **Subagent-driven development**
 
-The first touch turns possibility into code. `das-blatt-kuessen` gives each
+The first touch turns possibility into code. `blatt-kuessen` gives each
 coherent plan task to a fresh implementer, checks the resulting evidence, and
 uses independent task and final review before declaring the work complete.
 
-### 5. Der Zeile folgen · Follow the line
+### 5. Zeile gehen · Walk the line
 
 **Direct plan execution**
 
-`der-zeile-folgen` follows a written plan inline when subagents are unavailable
+`zeile-gehen` walks the line of a written plan when subagents are unavailable
 or unwanted. It executes continuously, preserves user changes, and verifies in
 proportion to actual risk.
 

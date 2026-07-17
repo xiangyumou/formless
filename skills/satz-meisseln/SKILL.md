@@ -1,9 +1,9 @@
 ---
-name: saetze-meisseln
+name: satz-meisseln
 description: Use for implementation planning when a task is complex enough to require a multi-step handoff, or when the user explicitly asks for a written implementation plan
 ---
 
-# Sätze meißeln
+# Satz meisseln
 
 ## Overview
 
@@ -153,6 +153,6 @@ Before handoff, check:
 7. A capable implementer can distinguish freedom within the plan from a reason
    to escalate.
 
-Then offer execution with `formless:das-blatt-kuessen` when
+Then offer execution with `formless:blatt-kuessen` when
 subagents are available. Do not require a separate execution workflow for a
 direct change.

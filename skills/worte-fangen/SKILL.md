@@ -14,7 +14,7 @@ change.
 ## Scope Gate
 
 - If intent, behavior, constraints, and implementation direction are already
-  clear, do not run this workflow. Proceed directly or use `saetze-meisseln` when
+  clear, do not run this workflow. Proceed directly or use `satz-meisseln` when
   the work still needs a multi-task handoff.
 - If consequential choices remain, explore them before implementation.
 - If only one small point is unclear, ask that question directly rather than
@@ -33,7 +33,7 @@ change.
    `docs/formless/specs/YYYY-MM-DD-<topic>-design.md`. For a small design,
    the approved conversation is sufficient unless the user requests a file.
 6. Self-review for contradictions, placeholders, scope creep, and ambiguity.
-7. Use `formless:saetze-meisseln` only when implementation needs a multi-task
+7. Use `formless:satz-meisseln` only when implementation needs a multi-task
    handoff. Otherwise proceed with the direct change.
 
 Do not commit the spec, start implementation, or invoke another workflow merely

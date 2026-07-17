@@ -1,9 +1,9 @@
 ---
-name: das-blatt-kuessen
+name: blatt-kuessen
 description: Use for subagent-driven development when executing an implementation plan with independent, reviewable tasks in the current session
 ---
 
-# Das Blatt küssen
+# Blatt kuessen
 
 Let the quill touch the blank page. Execute a written plan through fresh
 subagents, turning each coherent task into reviewed code.

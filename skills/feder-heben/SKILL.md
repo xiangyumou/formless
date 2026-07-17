@@ -13,10 +13,10 @@ material value, with user and repository instructions taking precedence.
 
 - Use `worte-fangen` when unresolved requirements or meaningful design choices
   need user input.
-- Use `saetze-meisseln` for complex work or a handoff to another model.
-- Use `das-blatt-kuessen` to execute a plan with fresh implementers
+- Use `satz-meisseln` for complex work or a handoff to another model.
+- Use `blatt-kuessen` to execute a plan with fresh implementers
   and independent review.
-- Use `der-zeile-folgen` when executing a plan inline or without subagents.
+- Use `zeile-gehen` when executing a plan inline or without subagents.
 - Make clear, localized changes directly with proportionate verification.
 
 Do not load a process skill merely because the task is broadly related to its
