@@ -41,9 +41,3 @@ to complete a checklist. User and repository instructions govern those actions.
 Cover only what the task needs: architecture, boundaries, data flow, error
 handling, compatibility, verification, and rollout considerations as relevant.
 Follow existing project patterns and avoid unrelated refactoring.
-
-## Visual Companion
-
-When a design decision would genuinely be clearer visually, offer the optional
-visual companion at that point. If accepted, read `visual-companion.md` and use
-the bundled scripts. Do not offer it for text-only questions or by default.
