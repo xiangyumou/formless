@@ -570,23 +570,16 @@ blessed path, so the model doesn't think it's violating the "never read skill
 files" rule. Don't go hunting for a `skillPaths`-style registration API in a
 harness that has no skill system — case 3 has none.
 
-### Step 6 — Add tests
+### Step 6 — Validate the wiring
 
-Match the existing per-harness test style:
+Inspect the hook or plugin output in an isolated local installation. Confirm
+that it uses the exact JSON or lifecycle shape the harness consumes, contains
+the bootstrap once, does not duplicate it, and reinjects after compaction when
+the harness requires that behavior. If bootstrap content is cached, also check
+the missing-file path fails safely.
 
-- **Shape A:** assert the hook's stdout has the exact JSON shape your harness
-  consumes, and that it contains the bootstrap. See `tests/hooks/test-session-start.sh`,
-  which validates each harness's output shape.
-- **Shape B:** a unit test that fakes the harness's plugin API and asserts the
-  lifecycle handlers register, the bootstrap injects once, the dedup guard
-  works, and (if relevant) compaction re-injection works. See
-  `tests/pi/test-pi-extension.mjs`. Add an isolated-install integration check in
-  the style of `tests/opencode/`.
-- If the bootstrap is cached, test that the cache behaves when the file is
-  missing (see the OpenCode caching tests).
-
-These automated tests cover the wiring; the live tmux run in Step 7 is what
-proves the integration actually triggers skills.
+This validates the wiring; the live run in Step 7 proves the integration
+actually triggers skills.
 
 ### Step 7 — Install locally, then drive a live instance to verify
 
@@ -782,16 +775,16 @@ dispatcher pattern.
 
 Use this as the live index; when in doubt, read the files, not this table.
 
-| Harness | Entry point | Bootstrap mechanism | Tool mapping | Tests | Distribution |
-|---|---|---|---|---|---|
-| Claude Code | `.claude-plugin/plugin.json` + `hooks/hooks.json` | shell hook → `hooks/session-start` (`hookSpecificOutput.additionalContext`) | native `Skill` tool; `references/claude-code-tools.md` | `tests/hooks/` | marketplace |
-| Codex | `.codex-plugin/plugin.json` (declares empty `hooks`) | native skill discovery (no session-start hook) | `references/codex-tools.md` | `tests/codex/`, `tests/codex-plugin-sync/` | fork sync (`scripts/sync-to-codex-plugin.sh`) |
-| Cursor | `.cursor-plugin/plugin.json` + `hooks/hooks-cursor.json` | shell hook → `hooks/session-start` (`additional_context`) | `references/claude-code-tools.md` | `tests/hooks/` | hand-authored |
-| Copilot CLI | (shares Claude Code hook path; `COPILOT_CLI` env) | shell hook → `hooks/session-start` (`additionalContext`) | `references/copilot-tools.md` | `tests/hooks/` | — |
-| Gemini CLI | `gemini-extension.json` + `GEMINI.md` | instructions file `@`-includes bootstrap + mapping | `references/gemini-tools.md` | — | `gemini extensions install` |
-| Kimi Code | `.kimi-plugin/plugin.json` | manifest `sessionStart.skill` loads `using-superpowers` | inline `skillInstructions` in manifest | `tests/kimi/` | marketplace or `/plugins install` GitHub URL |
-| OpenCode | `.opencode/plugins/superpowers.js` (declared via root `package.json` `main`) | in-process: `config` hook registers skills dir; `experimental.chat.messages.transform` injects user message | inline in `superpowers.js` | `tests/opencode/` | `opencode.json` plugin git URL |
-| pi | `.pi/extensions/superpowers.ts` | in-process: `resources_discover` registers skills; `context` event injects user message; lifecycle-flag + compaction-aware | `piToolMapping()` inline **and** `references/pi-tools.md` | `tests/pi/` | repo-root `package.json` fields |
+| Harness | Entry point | Bootstrap mechanism | Tool mapping | Distribution |
+|---|---|---|---|---|
+| Claude Code | `.claude-plugin/plugin.json` + `hooks/hooks.json` | shell hook → `hooks/session-start` (`hookSpecificOutput.additionalContext`) | native `Skill` tool; `references/claude-code-tools.md` | marketplace |
+| Codex | `.codex-plugin/plugin.json` (declares empty `hooks`) | native skill discovery (no session-start hook) | `references/codex-tools.md` | fork sync (`scripts/sync-to-codex-plugin.sh`) |
+| Cursor | `.cursor-plugin/plugin.json` + `hooks/hooks-cursor.json` | shell hook → `hooks/session-start` (`additional_context`) | `references/claude-code-tools.md` | hand-authored |
+| Copilot CLI | (shares Claude Code hook path; `COPILOT_CLI` env) | shell hook → `hooks/session-start` (`additionalContext`) | `references/copilot-tools.md` | — |
+| Gemini CLI | `gemini-extension.json` + `GEMINI.md` | instructions file `@`-includes bootstrap + mapping | `references/gemini-tools.md` | `gemini extensions install` |
+| Kimi Code | `.kimi-plugin/plugin.json` | manifest `sessionStart.skill` loads `using-superpowers` | inline `skillInstructions` in manifest | marketplace or `/plugins install` GitHub URL |
+| OpenCode | `.opencode/plugins/superpowers.js` (declared via root `package.json` `main`) | in-process: `config` hook registers skills dir; `experimental.chat.messages.transform` injects user message | inline in `superpowers.js` | `opencode.json` plugin git URL |
+| pi | `.pi/extensions/superpowers.ts` | in-process: `resources_discover` registers skills; `context` event injects user message; lifecycle-flag + compaction-aware | `piToolMapping()` inline **and** `references/pi-tools.md` | repo-root `package.json` fields |
 
 ## Appendix B — Gotchas that have bitten porters
 

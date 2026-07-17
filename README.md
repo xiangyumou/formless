@@ -229,7 +229,7 @@ The general contribution process for Superpowers is below. Keep in mind that we 
 4. Review the complete diff and verify changed plugin behavior
 5. Submit a PR, being sure to fill in the pull request template.
 
-Skill-behavior tests use the drill eval harness from [superpowers-evals](https://github.com/prime-radiant-inc/superpowers-evals/), cloned into `evals/` — see `evals/README.md` for setup. Plugin-infrastructure tests live at `tests/` and run via the relevant `run-*.sh` or `npm test`.
+Behavior evaluation, when needed, is maintained separately in [superpowers-evals](https://github.com/prime-radiant-inc/superpowers-evals/).
 
 ## Updating
 

@@ -60,8 +60,8 @@ commands, while Unix shells treat that block as a no-op heredoc and continue
 after it.
 
 Do not copy an implementation from this document. Read `hooks/run-hook.cmd`
-directly when changing the dispatcher, and run `tests/hooks/test-session-start.sh`
-afterward.
+directly when changing the dispatcher, then inspect its output for each
+supported environment.
 
 ### How it works on Windows (CMD.exe)
 
