@@ -117,8 +117,8 @@ paste the complete transcript here
 
 ## Rigor
 
-- [ ] If this is a skills change: I used `superpowers:writing-skills` and
-      completed adversarial pressure testing (paste results below)
+- [ ] If this is a skills change: I reviewed the complete behavior-shaping diff
+      and verified it in the supported harnesses (paste results below)
 - [ ] This change was tested adversarially, not just on the happy path
 - [ ] I did not modify carefully-tuned content (Red Flags table,
       rationalizations, "human partner" language) without extensive evals

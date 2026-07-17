@@ -192,38 +192,23 @@ The Pi package loads the Superpowers skills and a small extension that injects t
 
 1. **Direct execution** - Make clear, localized changes without creating a plan.
 
-2. **writing-plans** - For complex work or model handoff, define a small number of coherent deliverables with exact constraints, interfaces, and proportionate verification.
+2. **brainstorming** - Resolve meaningful requirements or design choices when the direction is not yet clear.
 
-3. **subagent-driven-development** - Dispatch a fresh implementer per planned task and retain independent review without splitting implementation into tiny workflow steps.
+3. **writing-plans** - For complex work or model handoff, define a small number of coherent deliverables with exact constraints, interfaces, and proportionate verification.
 
-Other skills remain available for specialized situations or explicit requests;
-they are not mandatory stages of every change.
+4. **subagent-driven-development** - Dispatch a fresh implementer per planned task and retain independent task and final review.
+
+5. **executing-plans** - Execute a written plan inline when subagents are unavailable or not desired.
 
 ## What's Inside
 
 ### Skills Library
 
-**Testing**
-- **test-driven-development** - RED-GREEN-REFACTOR cycle (includes testing anti-patterns reference)
-
-**Debugging**
-- **systematic-debugging** - 4-phase root cause process (includes root-cause-tracing, defense-in-depth, condition-based-waiting techniques)
-- **verification-before-completion** - Ensure it's actually fixed
-
-**Collaboration** 
-- **brainstorming** - Socratic design refinement
-- **writing-plans** - Detailed implementation plans
-- **executing-plans** - Batch execution with checkpoints
-- **dispatching-parallel-agents** - Concurrent subagent workflows
-- **requesting-code-review** - Pre-review checklist
-- **receiving-code-review** - Responding to feedback
-- **using-git-worktrees** - Parallel development branches
-- **finishing-a-development-branch** - Merge/PR decision workflow
-- **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
-
-**Meta**
-- **writing-skills** - Create new skills following best practices (includes testing methodology)
-- **using-superpowers** - Introduction to the skills system
+- **using-superpowers** - Lightweight workflow selection and platform bootstrap
+- **brainstorming** - Resolve requirements and design trade-offs
+- **writing-plans** - Create implementation handoffs with coherent task boundaries
+- **subagent-driven-development** - Execute with fresh implementers, task review, and final review
+- **executing-plans** - Execute plans inline without subagents
 
 ## Philosophy
 
@@ -241,12 +226,10 @@ The general contribution process for Superpowers is below. Keep in mind that we 
 1. Fork the repository
 2. Switch to the 'dev' branch
 3. Create a branch for your work
-4. Follow the `writing-skills` skill for creating and testing new and modified skills
+4. Review the complete diff and verify changed plugin behavior
 5. Submit a PR, being sure to fill in the pull request template.
 
 Skill-behavior tests use the drill eval harness from [superpowers-evals](https://github.com/prime-radiant-inc/superpowers-evals/), cloned into `evals/` — see `evals/README.md` for setup. Plugin-infrastructure tests live at `tests/` and run via the relevant `run-*.sh` or `npm test`.
-
-See `skills/writing-skills/SKILL.md` for the complete guide.
 
 ## Updating
 

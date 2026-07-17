@@ -4,7 +4,7 @@
 #
 # No drill coverage: this test asks the agent to *describe* SDD (string-
 # matches its verbal explanation against expected keywords like
-# "self-review", "skeptical", "worktree", "Step 1", "loop"). Drill scenarios
+# "self-review", "skeptical", "task brief", "Step 1", "loop"). Drill scenarios
 # test behavior (real subagent dispatch, plan-following, review loops),
 # not description-recall. Kept by design.
 set -euo pipefail
@@ -136,7 +136,7 @@ output=$(run_claude "In subagent-driven-development, how does the controller pro
 Controller provides: <directly or by file>
 Implementer must read plan file: <yes or no>" "$CLAUDE_PROMPT_TIMEOUT")
 
-if assert_contains "$output" "provide.*directly\|full.*text\|paste\|include.*prompt" "Provides text directly"; then
+if assert_contains "$output" "by file\|brief.*file\|task.*brief" "Provides task brief by file"; then
     : # pass
 else
     exit 1
@@ -150,21 +150,8 @@ fi
 
 echo ""
 
-# Test 8: Verify worktree requirement
-echo "Test 8: Worktree requirement..."
-
-output=$(run_claude "What workflow skills are required before using subagent-driven-development? List any prerequisites or required skills." "$CLAUDE_PROMPT_TIMEOUT")
-
-if assert_contains "$output" "using-git-worktrees\|worktree" "Mentions worktree requirement"; then
-    : # pass
-else
-    exit 1
-fi
-
-echo ""
-
-# Test 9: Verify main branch warning
-echo "Test 9: Main branch red flag..."
+# Test 8: Verify main branch warning
+echo "Test 8: Main branch red flag..."
 
 output=$(run_claude "In subagent-driven-development, is it okay to start implementation directly on the main branch?" "$CLAUDE_PROMPT_TIMEOUT")
 
