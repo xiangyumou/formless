@@ -35,16 +35,28 @@ Before writing a plan, classify the task:
 
 Assume the implementer is capable but has no conversation history. Include:
 
-- exact files, or precise discovery instructions when paths cannot yet be known
+- target files or components when known, or a bounded discovery area when not
 - intended behavior and acceptance criteria
-- architectural decisions and constraints that must not be re-decided
-- interfaces between tasks, including exact names and types when known
-- verification commands or observable checks
-- escalation conditions for ambiguity or unexpected repository state
+- consequential decisions and constraints that must not be re-decided
+- interfaces between tasks, with exact contracts where integration depends on them
+- proportionate verification evidence, with exact commands only when non-obvious
+- escalation conditions for facts that would invalidate the chosen direction
 
-Show exact code where the implementation is subtle or where a weaker model
-could reasonably choose the wrong shape. Do not transcribe obvious changes
-merely to make the plan look complete.
+Resolve choices that materially affect behavior, architecture, data ownership,
+public interfaces, compatibility, security, or cross-task integration. When
+several viable choices exist, select one and record the reason; obtain user
+input first when the choice belongs to the user.
+
+Leave routine engineering judgment to the implementer: local naming, helper
+decomposition, edit order, and implementation details that follow clearly from
+repository conventions. Show exact code or signatures only when correctness or
+an inter-task contract depends on that exact shape. Do not inventory every
+delegated detail; state implementation freedom only where a boundary could
+otherwise be mistaken for a prescribed mechanism.
+
+The plan has the right resolution when the implementer does not need to make a
+product or architectural decision, but still has room to implement the chosen
+direction idiomatically. Specify outcomes and guardrails, not keystrokes.
 
 ## Task Boundaries
 
@@ -110,15 +122,15 @@ user requests another location.
 
 **Outcome:** [observable result]
 
-**Implementation:**
-- [specific decisions and changes]
+**Decisions and Boundaries:**
+- [chosen approach, binding constraint, or non-obvious behavior]
 
 **Interfaces:**
 - Consumes: [existing contract]
 - Produces: [contract later tasks rely on]
 
 **Verification:**
-- [exact command or visual/manual check]
+- [evidence that would detect failure; exact command when needed]
 
 **Escalate if:**
 - [condition the implementer must not guess about]
@@ -136,8 +148,10 @@ Before handoff, check:
 2. Tasks are coherent deliverables rather than workflow fragments.
 3. Cross-task names, types, and ordering agree.
 4. Verification is proportionate and would detect a real failure.
-5. A weaker implementer can distinguish mechanical work from decisions that
-   require escalation.
+5. No consequential choice has been silently delegated to the implementer.
+6. No instruction dictates routine mechanics without reducing meaningful risk.
+7. A capable implementer can distinguish freedom within the plan from a reason
+   to escalate.
 
 Then offer execution with `formless:das-blatt-kuessen` when
 subagents are available. Do not require a separate execution workflow for a
