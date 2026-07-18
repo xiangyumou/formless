@@ -20,15 +20,20 @@ only when isolation is actually needed. Preserve unrelated user changes.
 
 ## Execution
 
-1. Read the plan once and check its constraints, task ordering, interfaces,
-   verification requirements, and escalation conditions.
-2. Raise genuine plan conflicts before implementation. Otherwise proceed
+1. Verify that the plan status is `Approved` and that it references an approved
+   spec. Return to the appropriate phase if either artifact is missing or
+   unapproved.
+2. Read the plan once, read the files in its context map, and check its
+   constraints, task ordering, interfaces, verification requirements, and
+   escalation conditions.
+3. Raise genuine plan conflicts as one batched question with viable answers and
+   a recommendation. Otherwise proceed
    continuously without asking for permission between tasks.
-3. Execute each coherent task as one deliverable. Do not turn its internal
+4. Execute each coherent task as one deliverable. Do not turn its internal
    implementation and verification actions into separate tasks.
-4. Follow the plan's verification strategy. Add tests only when the plan's
+5. Follow the plan's verification strategy. Add tests only when the plan's
    test-value criteria are met; do not invent coverage work during execution.
-5. Inspect the diff after each task and record progress before continuing.
+6. Inspect the diff after each task and record progress before continuing.
 
 Stop for missing authority, an unresolved blocker, a contradiction, or an
 unexpected decision the plan does not answer. Do not guess at architecture or
@@ -43,6 +48,11 @@ Run the plan's final verification and report:
 - verification performed and results
 - remaining concerns
 - current branch and workspace state
+
+After reporting completion, ask the user which delivery action comes next:
+additional review, commit, push, pull request, or stop. Provide a recommendation
+based on the current repository state. Do not perform the selected action until
+the user chooses it.
 
 Do not automatically run a broader suite than the plan requires. Do not merge,
 push, create a PR, delete a branch, remove a worktree, or discard changes unless

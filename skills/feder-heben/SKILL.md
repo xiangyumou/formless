@@ -11,13 +11,29 @@ workflow that gives an unformed request enough structure to move forward.
 Skills are tools, not mandatory ceremony. Use the smallest workflow that adds
 material value, with user and repository instructions taking precedence.
 
-- Use `worte-fangen` when unresolved requirements or meaningful design choices
-  need user input.
-- Use `satz-meisseln` for complex work or a handoff to another model.
-- Use `blatt-kuessen` to execute a plan with fresh implementers
-  and independent review.
-- Use `zeile-gehen` when executing a plan inline or without subagents.
-- Make clear, localized changes directly with proportionate verification.
+## Workflow
+
+Route work through the phases it actually needs:
+
+1. Use `worte-fangen` to resolve consequential choices and produce an approved
+   spec.
+2. Use `satz-meisseln` to turn an approved spec into an approved implementation
+   plan.
+3. Use `blatt-kuessen` to execute the plan with fresh implementers and
+   independent review, or `zeile-gehen` to execute it directly.
+4. After execution, ask which delivery action comes next: review, commit, push,
+   or pull request.
+
+Make clear, localized changes directly when no design or implementation plan is
+needed. After the direct change is verified, ask which delivery action the user
+wants next.
+
+## Phase Gates
+
+Do not silently cross from spec to plan or from plan to execution. At the end of
+each phase, summarize the completed artifact, state the available next actions,
+and ask the user which action to take. Within an approved execution plan,
+continue across clean tasks without pausing between them.
 
 Do not load a process skill merely because the task is broadly related to its
 topic. Announce a selected skill briefly, then follow it unless a more specific

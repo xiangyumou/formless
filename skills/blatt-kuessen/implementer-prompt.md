@@ -13,7 +13,8 @@ Subagent (general-purpose):
     ## Task Description
 
     Read your task brief first: [BRIEF_FILE]
-    It contains the full task text from the plan.
+    It contains the plan-wide background, constraints, context map, and the full
+    selected task text.
 
     ## Context
 

@@ -30,9 +30,14 @@ Before implementation:
 
 ## Start
 
-Read the plan once. Extract its tasks, global constraints, interfaces,
-verification requirements, and escalation conditions. Scan for contradictions
-before Task 1 and present genuine conflicts as one batched question.
+Verify that the plan status is `Approved` and that it references an approved
+spec. If either artifact is missing or unapproved, stop and return to the
+appropriate phase instead of reconstructing decisions during execution.
+
+Read the plan once. Read the files in its context map, then extract its tasks,
+global constraints, interfaces, verification requirements, and escalation
+conditions. Scan for contradictions before Task 1 and present genuine conflicts
+as one batched question with viable answers and a recommendation.
 
 Use one implementer dispatch per plan task. Do not split a coherent plan task
 into separate dispatches for testing, implementation, documentation, or
@@ -47,8 +52,9 @@ compaction.
 For each task:
 
 1. Record the current commit as `BASE`.
-2. Run `scripts/task-brief PLAN_FILE N`; use the generated file as the task's
-   single source of requirements.
+2. Run `scripts/task-brief PLAN_FILE N`; use the generated file, which contains
+   the plan-wide background and the selected task, as the task's single source
+   of requirements.
 3. Dispatch a fresh implementer using `implementer-prompt.md`. Provide only the
    brief path, necessary prior-task interfaces, workspace path, report path,
    and context the brief cannot contain.
@@ -122,6 +128,11 @@ Report:
 - final-review verdict
 - remaining concerns or Minor findings
 - current branch and workspace state
+
+After reporting completion, ask the user which delivery action comes next:
+additional review, commit, push, pull request, or stop. Provide a recommendation
+based on the current repository state. Do not perform the selected action until
+the user chooses it.
 
 Do not merge, push, create a PR, delete a branch, remove a worktree, or discard
 changes unless the user explicitly requests that action.

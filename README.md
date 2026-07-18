@@ -22,15 +22,17 @@ work proceeds directly.
 
 An idea is still a ghost until its consequential choices have names.
 `worte-fangen` resolves requirements, design decisions, and architectural
-trade-offs with the user before implementation begins.
+trade-offs in a single question batch with viable answers and a recommendation,
+then records the approved result in a fixed-format specification.
 
 ### 3. Satz meisseln · Chisel the sentence
 
 **Implementation planning and model handoff**
 
-`satz-meisseln` turns approved intent into a durable implementation plan. It
-records boundaries, interfaces, constraints, verification, and escalation
-points without fragmenting coherent work into ceremonial steps.
+`satz-meisseln` turns an approved specification into a fixed-format
+implementation plan. It records background, authoritative context files,
+boundaries, interfaces, verification, and escalation points without
+fragmenting coherent work into ceremonial steps.
 
 ### 4. Blatt kuessen · Kiss the page
 
@@ -50,13 +52,23 @@ proportion to actual risk.
 
 ## How It Works
 
-Formless does not require a workflow for every request. The entry skill chooses
-among three paths:
+Formless does not require every phase for every request. The full workflow is:
 
-1. Make an obvious localized change directly and verify it.
-2. Catch unresolved decisions, then chisel a plan when coordination or handoff
-   warrants one.
-3. Execute an existing plan with fresh subagents or follow it directly.
+1. **Brainstorm:** inspect the project and ask all known consequential questions
+   together, with options and recommended answers.
+2. **Spec:** save the resolved design in the required format and ask the user to
+   approve it.
+3. **Plan:** turn the approved spec into a required-format implementation plan
+   with global background and task-level context pointers, then ask for
+   approval.
+4. **Execute:** after the user chooses an execution mode, run the approved plan
+   continuously with fresh subagents or directly.
+5. **Deliver:** report the completed work and ask whether to review, commit,
+   push, open a pull request, or stop.
+
+Each phase ends at an explicit user gate. Clean tasks inside an approved
+execution plan do not pause between steps. An obvious localized change may skip
+spec and plan, proceed directly, and end at the delivery gate.
 
 Plans preserve decisions that should not be rediscovered. Tests are added when
 they protect meaningful behavior and can catch a plausible regression;
@@ -91,14 +103,23 @@ multi_agent = true
 
 ## Runtime Artifacts
 
-- Approved designs: `docs/formless/specs/`
-- Implementation plans: `docs/formless/plans/`
+- Specifications: `docs/formless/specs/YYYY-MM-DD-<topic>.md`
+- Implementation plans: `docs/formless/plans/YYYY-MM-DD-<topic>.md`
 - Subagent execution state: `.formless/sdd/`
+
+Specs and plans use fixed heading order and required fields. Approved plans
+link to their approved source spec. Global background explains the system and
+points to authoritative files; task context explains only what that task needs
+and where to read further.
 
 ## Principles
 
 - **Process only when it pays for itself** — direct work stays direct.
 - **Decisions survive handoff** — plans preserve judgment, not busywork.
+- **Questions arrive together** — consequential choices include viable answers
+  and a recommendation.
+- **Phases require consent** — spec, plan, execution, and delivery have explicit
+  user gates.
 - **Evidence over claims** — completion requires relevant verification.
 - **Coherent units of work** — implementation, verification, and review stay
   aligned around useful deliverables.

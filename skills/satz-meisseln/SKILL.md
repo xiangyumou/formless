@@ -1,13 +1,13 @@
 ---
 name: satz-meisseln
-description: Use for implementation planning when a task is complex enough to require a multi-step handoff, or when the user explicitly asks for a written implementation plan
+description: Use for implementation planning after a Formless specification has been approved and the work requires a multi-task handoff or the user explicitly requests a written implementation plan with fixed structure and context pointers
 ---
 
 # Satz meisseln
 
 ## Overview
 
-Chisel fluid thought into durable sentences: write an implementation plan that
+Chisel an approved specification into a durable implementation plan that
 another engineer or model can execute without the conversation that shaped it.
 
 Write implementation plans for another engineer or model to execute with little
@@ -27,9 +27,11 @@ Before writing a plan, classify the task:
   proportionate verification.
 - **Planned change:** spans meaningful boundaries, has dependencies or interface
   decisions, carries migration or compatibility risk, or will be handed to a
-  model without the current context. Write a plan.
-- **Unclear change:** important facts are missing. Investigate or ask before
-  planning; do not turn uncertainty into invented steps.
+  model without the current context. Require an approved spec, then write a
+  plan.
+- **Unclear or unapproved change:** important decisions are missing or the spec
+  is not approved. Return to `formless:worte-fangen`; do not turn uncertainty
+  into invented plan steps.
 
 ## Planning For Handoff
 
@@ -41,6 +43,16 @@ Assume the implementer is capable but has no conversation history. Include:
 - interfaces between tasks, with exact contracts where integration depends on them
 - proportionate verification evidence, with exact commands only when non-obvious
 - escalation conditions for facts that would invalidate the chosen direction
+
+Start with enough background for the implementer to understand the system,
+where this change belongs, and why the chosen approach fits. Add a context map
+that points to the authoritative files for current behavior, interfaces,
+repository conventions, and verification. Do not reproduce every detail from
+those files.
+
+At task level, include only the context specific to that deliverable: why the
+task exists, what prior work it depends on, and which files to read first. Do
+not repeat the full project background in every task.
 
 Resolve choices that materially affect behavior, architecture, data ownership,
 public interfaces, compatibility, security, or cross-task integration. When
@@ -99,46 +111,94 @@ the choice would not be obvious to the implementer.
 Never create a test whose main purpose is to record that this particular edit
 was made. Tests are durable behavior checks, not a duplicate change log.
 
+## Plan Process
+
+1. Read the approved spec and verify that its status is `Approved` and its open
+   questions are resolved.
+2. Inspect the source files named by the spec and discover any additional
+   authoritative files required for implementation.
+3. Write the draft plan to
+   `docs/formless/plans/YYYY-MM-DD-<topic>.md` using the exact format below.
+4. Self-review the plan against the approved spec and repository state.
+5. Summarize the tasks, key boundaries, and verification strategy, then ask the
+   user to approve the plan or request revisions.
+6. After approval, change `Status` to `Approved` and ask the user to choose
+   `formless:blatt-kuessen`, `formless:zeile-gehen`, or stop.
+
+Do not start execution, commit, or invoke an execution skill without the user's
+choice at the phase gate.
+
 ## Plan Format
 
-Save plans to `docs/formless/plans/YYYY-MM-DD-<feature-name>.md` unless the
-user requests another location.
+Use every heading in this order. Write `None` when a section does not apply; do
+not omit sections or invent a different structure.
 
 ```markdown
 # [Feature Name] Implementation Plan
 
-**Goal:** [one sentence]
+**Status:** Draft | Approved
 
-**Architecture:** [the important approach and why]
+**Source Spec:** `docs/formless/specs/YYYY-MM-DD-<topic>.md`
 
-**Global Constraints:**
-- [exact project-wide requirement]
+## Goal
+
+[One observable sentence.]
+
+## Background
+
+[How the relevant system currently works, where the change belongs, and the
+minimum context needed to understand the plan.]
+
+## Architecture
+
+[The chosen implementation approach and why it follows the approved spec.]
+
+## Constraints
+
+- [Binding project-wide requirement.]
+
+## Context Map
+
+- `path/to/source` - [What authoritative information to read here.]
+
+## Tasks
 
 ### Task N: [coherent deliverable]
 
+**Outcome:**
+
+[Observable result produced by this task.]
+
+**Context:**
+
+[Why this task exists, what it depends on, and which files to read first.]
+
 **Files:**
+
 - Modify: `path/to/file`
 - Create: `path/to/file`
 
-**Outcome:** [observable result]
-
 **Decisions and Boundaries:**
+
 - [chosen approach, binding constraint, or non-obvious behavior]
 
 **Interfaces:**
+
 - Consumes: [existing contract]
 - Produces: [contract later tasks rely on]
 
 **Verification:**
+
 - [evidence that would detect failure; exact command when needed]
 
 **Escalate if:**
+
 - [condition the implementer must not guess about]
 ```
 
-Omit empty sections. Do not use placeholders such as `TBD`, "handle edge
-cases", or "add appropriate tests". If a fact is unknown, resolve it before
-handoff or make the discovery step and decision boundary explicit.
+Do not use placeholders such as `TBD`, "handle edge cases", or "add appropriate
+tests". If a fact is unknown, resolve it before handoff or make the discovery
+step and decision boundary explicit.
 
 ## Self-Review
 
@@ -152,7 +212,6 @@ Before handoff, check:
 6. No instruction dictates routine mechanics without reducing meaningful risk.
 7. A capable implementer can distinguish freedom within the plan from a reason
    to escalate.
-
-Then offer execution with `formless:blatt-kuessen` when
-subagents are available. Do not require a separate execution workflow for a
-direct change.
+8. The background and context map identify authoritative files without copying
+   their contents into every task.
+9. Every fixed-format heading is present and the source spec is approved.
