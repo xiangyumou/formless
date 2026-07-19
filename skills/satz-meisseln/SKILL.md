@@ -1,13 +1,13 @@
 ---
 name: satz-meisseln
-description: Use for implementation planning after a Formless specification has been approved and the work requires a multi-task handoff or the user explicitly requests a written implementation plan with fixed structure and context pointers
+description: Use for implementation planning after a Formless specification has resolved the needed decisions and the user has chosen planning, when the work requires a multi-task handoff or the user explicitly requests a written implementation plan with fixed structure and context pointers
 ---
 
 # Satz meisseln
 
 ## Overview
 
-Chisel an approved specification into a durable implementation plan that
+Chisel a resolved specification into a durable implementation plan that
 another engineer or model can execute without the conversation that shaped it.
 
 Write implementation plans for another engineer or model to execute with little
@@ -27,11 +27,10 @@ Before writing a plan, classify the task:
   proportionate verification.
 - **Planned change:** spans meaningful boundaries, has dependencies or interface
   decisions, carries migration or compatibility risk, or will be handed to a
-  model without the current context. Require an approved spec, then write a
-  plan.
-- **Unclear or unapproved change:** important decisions are missing or the spec
-  is not approved. Return to `formless:worte-fangen`; do not turn uncertainty
-  into invented plan steps.
+  model without the current context. Require a resolved spec and the user's
+  choice to plan, then write a plan.
+- **Unclear or unresolved change:** important decisions are missing. Return to
+  `formless:worte-fangen`; do not turn uncertainty into invented plan steps.
 
 ## Planning For Handoff
 
@@ -118,17 +117,16 @@ was made. Tests are durable behavior checks, not a duplicate change log.
 
 ## Plan Process
 
-1. Read the approved spec and verify that its status is `Approved` and its open
-   questions are resolved.
+1. Read the spec and verify that its open questions are resolved and the user
+   has explicitly selected the planning phase.
 2. Inspect the source files named by the spec and discover any additional
    authoritative files required for implementation.
-3. Write the draft plan to
+3. Write the plan to
    `docs/formless/plans/YYYY-MM-DD-<topic>.md` using the exact format below.
-4. Self-review the plan against the approved spec and repository state.
+4. Self-review the plan against the spec and repository state.
 5. Summarize the tasks, key boundaries, and verification strategy, then ask the
-   user to approve the plan or request revisions.
-6. After approval, change `Status` to `Approved` and ask the user to choose
-   `formless:blatt-kuessen`, `formless:zeile-gehen`, or stop.
+   user to choose `formless:blatt-kuessen`, `formless:zeile-gehen`, request
+   revisions, or stop.
 
 Do not start execution, commit, or invoke an execution skill without the user's
 choice at the phase gate.
@@ -140,8 +138,6 @@ not omit sections or invent a different structure.
 
 ```markdown
 # [Feature Name] Implementation Plan
-
-**Status:** Draft | Approved
 
 **Source Spec:** `docs/formless/specs/YYYY-MM-DD-<topic>.md`
 
@@ -156,7 +152,7 @@ minimum context needed to understand the plan.]
 
 ## Architecture
 
-[The chosen implementation approach and why it follows the approved spec.]
+[The chosen implementation approach and why it follows the spec.]
 
 ## Constraints
 
@@ -219,4 +215,5 @@ Before handoff, check:
    to escalate.
 8. The background and context map identify authoritative files without copying
    their contents into every task.
-9. Every fixed-format heading is present and the source spec is approved.
+9. Every fixed-format heading is present and the source spec's decisions are
+   resolved.

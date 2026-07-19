@@ -23,13 +23,13 @@ work proceeds directly.
 An idea is still a ghost until its consequential choices have names.
 `worte-fangen` resolves requirements, design decisions, and architectural
 trade-offs in a single question batch with viable answers and a recommendation,
-then records the approved result in a fixed-format specification.
+then records the resolved result in a fixed-format specification.
 
 ### 3. Satz meisseln · Chisel the sentence
 
 **Implementation planning and model handoff**
 
-`satz-meisseln` turns an approved specification into a fixed-format
+`satz-meisseln` turns a resolved specification into a fixed-format
 implementation plan. It records background, authoritative context files,
 boundaries, interfaces, verification, and escalation points without
 fragmenting coherent work into ceremonial steps.
@@ -56,17 +56,17 @@ Formless does not require every phase for every request. The full workflow is:
 
 1. **Brainstorm:** inspect the project and ask all known consequential questions
    together, with options and recommended answers.
-2. **Spec:** save the resolved design in the required format and ask the user to
-   approve it.
-3. **Plan:** turn the approved spec into a required-format implementation plan
-   with global background and task-level context pointers, then ask for
-   approval.
-4. **Execute:** after the user chooses an execution mode, run the approved plan
+2. **Spec:** save the resolved design in the required format and ask the user
+   whether to proceed to planning.
+3. **Plan:** turn the resolved spec into a required-format implementation plan
+   with global background and task-level context pointers, then ask the user to
+   choose execution, revisions, or stop.
+4. **Execute:** after the user chooses an execution mode, run the plan
    continuously with fresh subagents or directly.
 5. **Deliver:** report the completed work and ask whether to review, commit,
    push, open a pull request, or stop.
 
-Each phase ends at an explicit user gate. Clean tasks inside an approved
+Each phase ends at an explicit user gate. Clean tasks inside a user-authorized
 execution plan do not pause between steps. An obvious localized change may skip
 spec and plan, proceed directly, and end at the delivery gate.
 
@@ -108,8 +108,8 @@ multi_agent = true
 - Implementation plans: `docs/formless/plans/YYYY-MM-DD-<topic>.md`
 - Subagent execution state: `.formless/sdd/`
 
-Specs and plans use fixed heading order and required fields. Approved plans
-link to their approved source spec. Global background explains the system and
+Specs and plans use fixed heading order and required fields. Plans link to their
+resolved source spec. Global background explains the system and
 points to authoritative files; task context explains only what that task needs
 and where to read further.
 

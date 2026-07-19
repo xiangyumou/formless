@@ -6,7 +6,8 @@ description: Use for brainstorming when a proposed feature or behavior change ha
 # Worte fangen
 
 Catch the words before they disappear. Resolve consequential choices and turn
-an unformed idea into an approved specification.
+an unformed idea into a specification whose resolved decisions can guide the
+next phase.
 
 This workflow is for decisions, not ceremony. If intent, behavior, constraints,
 and implementation direction are already clear and the change is localized,
@@ -21,7 +22,7 @@ one at a time.
 
 Use the runtime's native user-question tool when it is available. Otherwise,
 ask the batch in numbered text. The same rule applies to follow-up questions
-and the approval choice at each phase gate.
+and the next-phase choice at each phase gate.
 
 For each question:
 
@@ -42,13 +43,14 @@ only when the first answers reveal new consequential uncertainty.
 2. Ask one complete question batch covering purpose, scope, behavior, important
    trade-offs, compatibility, and success criteria as applicable.
 3. Resolve follow-up uncertainty in one additional batch when necessary.
-4. Write the draft spec to
+4. Write the spec to
    `docs/formless/specs/YYYY-MM-DD-<topic>.md` using the exact format below.
 5. Self-review the spec for contradictions, unresolved placeholders, scope
    creep, missing decisions, and unverifiable acceptance criteria.
-6. Summarize the draft and ask the user to approve it or request revisions.
-7. After approval, change `Status` to `Approved`, ensure `Open Questions` says
-   `None`, and ask whether to proceed to `formless:satz-meisseln` or stop.
+6. Summarize the spec and ask the user whether to proceed to
+   `formless:satz-meisseln`, request revisions, or stop.
+7. Before moving on, ensure `Open Questions` says `None` and that the user has
+   explicitly selected the planning phase.
 
 Do not write an implementation plan, start implementation, commit, or invoke
 the next phase without the user's choice at the phase gate.
@@ -60,8 +62,6 @@ not omit sections or invent a different structure.
 
 ```markdown
 # [Feature Name] Specification
-
-**Status:** Draft | Approved
 
 ## Problem
 
@@ -109,5 +109,5 @@ not omit sections or invent a different structure.
 
 ## Open Questions
 
-- [Unresolved question, or `None` before approval.]
+- [Unresolved question, or `None` when the decisions are resolved.]
 ```

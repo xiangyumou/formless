@@ -22,12 +22,12 @@ a native question UI in plain text when the tool is available.
 
 Route work through the phases it actually needs:
 
-1. Use `worte-fangen` to resolve consequential choices and produce an approved
-   spec.
-2. Use `satz-meisseln` to turn an approved spec into an approved implementation
-   plan.
-3. Use `blatt-kuessen` to execute the plan with fresh implementers and
-   independent review, or `zeile-gehen` to execute it directly.
+1. Use `worte-fangen` to resolve consequential choices and produce a spec.
+2. After the user chooses planning, use `satz-meisseln` to turn that spec into
+   an implementation plan.
+3. After the user chooses execution, use `blatt-kuessen` to execute the plan
+   with fresh implementers and independent review, or `zeile-gehen` to execute
+   it directly.
 4. After execution, ask which delivery action comes next: review, commit, push,
    or pull request.
 
@@ -39,7 +39,7 @@ wants next.
 
 Do not silently cross from spec to plan or from plan to execution. At the end of
 each phase, summarize the completed artifact, state the available next actions,
-and ask the user which action to take. Within an approved execution plan,
+and ask the user which action to take. Within a user-authorized execution plan,
 continue across clean tasks without pausing between them.
 
 Do not load a process skill merely because the task is broadly related to its

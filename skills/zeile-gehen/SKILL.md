@@ -20,9 +20,10 @@ only when isolation is actually needed. Preserve unrelated user changes.
 
 ## Execution
 
-1. Verify that the plan status is `Approved` and that it references an approved
-   spec. Return to the appropriate phase if either artifact is missing or
-   unapproved.
+1. Verify that the plan and its source spec exist, their decisions are resolved,
+   and the user explicitly chose inline execution. Return to the appropriate
+   phase if an artifact is missing, a decision is unresolved, or execution was
+   not authorized.
 2. Read the plan once, read the files in its context map, and check its
    constraints, task ordering, interfaces, verification requirements, and
    escalation conditions.

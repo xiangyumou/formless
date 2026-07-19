@@ -30,9 +30,11 @@ Before implementation:
 
 ## Start
 
-Verify that the plan status is `Approved` and that it references an approved
-spec. If either artifact is missing or unapproved, stop and return to the
-appropriate phase instead of reconstructing decisions during execution.
+Verify that the plan and its source spec exist, their decisions are resolved,
+and the user explicitly chose subagent-driven execution. If an artifact is
+missing, a decision is unresolved, or execution was not authorized, stop and
+return to the appropriate phase instead of reconstructing decisions during
+execution.
 
 Read the plan once. Read the files in its context map, then extract its tasks,
 global constraints, interfaces, verification requirements, and escalation
@@ -44,9 +46,9 @@ Use one implementer dispatch per plan task. Do not split a coherent plan task
 into separate dispatches for testing, implementation, documentation, or
 committing.
 
-Track durable progress in `.formless/sdd/progress.md`. Resume from the first
-task not recorded as complete; trust the ledger and git history after context
-compaction.
+Track durable progress in `.formless/sdd/progress.md`. Record the user's
+selected execution mode, then resume from the first task not recorded as
+complete; trust the ledger and git history after context compaction.
 
 ## Per-Task Loop
 
