@@ -37,7 +37,8 @@ appropriate phase instead of reconstructing decisions during execution.
 Read the plan once. Read the files in its context map, then extract its tasks,
 global constraints, interfaces, verification requirements, and escalation
 conditions. Scan for contradictions before Task 1 and present genuine conflicts
-as one batched question with viable answers and a recommendation.
+as one batched question with viable answers and a recommendation, using the
+runtime's native user-question tool when it is available.
 
 Use one implementer dispatch per plan task. Do not split a coherent plan task
 into separate dispatches for testing, implementation, documentation, or
@@ -59,7 +60,8 @@ For each task:
    brief path, necessary prior-task interfaces, workspace path, report path,
    and context the brief cannot contain.
 4. Inspect the implementer's status and report. Never trust a completion claim
-   without checking the diff and verification evidence.
+   without checking the diff and verification evidence, including the recorded
+   alternative evidence when no test was added.
 5. Run `scripts/review-package BASE HEAD` and dispatch a fresh reviewer using
    `task-reviewer-prompt.md`.
 6. Send Critical and Important findings to a fix subagent, repeat focused

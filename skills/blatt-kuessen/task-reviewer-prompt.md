@@ -71,9 +71,11 @@ Subagent (general-purpose):
 
     Judge whether the chosen verification can catch a realistic failure of the
     required behavior. Do not request tests solely because production code
-    changed. A proposed test must protect meaningful behavior, fail usefully for
-    a plausible regression, remain stable across implementation changes, and
-    justify its maintenance cost.
+    changed. When no test was added, require recorded alternative evidence that
+    can detect the task's primary realistic failure mode. A proposed test must
+    protect meaningful behavior, fail usefully for a plausible regression,
+    remain stable across implementation changes, and justify its maintenance
+    cost.
 
     ## Part 1: Spec Compliance
 
@@ -134,9 +136,6 @@ Subagent (general-purpose):
     block), that IS a finding — report it as Important, labeled
     plan-mandated. The plan's authorship does not grade its own work; the
     human decides.
-    Acknowledge what was done well before listing issues — accurate praise
-    helps the implementer trust the rest of the feedback.
-
     ## Output Format
 
     ### Spec Compliance
@@ -146,9 +145,6 @@ Subagent (general-purpose):
     - ⚠️ Cannot verify from diff: [requirements you could not verify from the
       diff alone, and what the controller should check — report alongside the
       ✅/❌ verdict for everything you could verify]
-
-    ### Strengths
-    [What's well done? Be specific.]
 
     ### Issues
 
@@ -182,7 +178,7 @@ Subagent (general-purpose):
   package to (`scripts/review-package BASE HEAD` prints the unique path it
   wrote; the package never enters the controller's context)
 
-**Reviewer returns:** Spec Compliance verdict (✅/❌/⚠️), Strengths, Issues
+**Reviewer returns:** Spec Compliance verdict (✅/❌/⚠️), Issues
 (Critical/Important/Minor), Task quality verdict
 
 A fix dispatch can address spec gaps and quality findings together;

@@ -96,6 +96,10 @@ Choose verification based on what could realistically fail and what evidence
 would detect that failure. A production change does not automatically require a
 new test.
 
+Every behavior change requires at least one targeted verification that can
+detect its primary realistic failure mode. A test is one form of that evidence,
+not an automatic requirement.
+
 Add a test only when all of these are true:
 
 1. It protects behavior or an invariant that matters beyond this patch.
@@ -103,10 +107,11 @@ Add a test only when all of these are true:
 3. The assertion can remain stable when implementation details change.
 4. Its confidence is worth its maintenance and execution cost.
 
-If those conditions are not met, use the most direct relevant evidence already
-available: existing tests, static checks, a build, a focused smoke check, or
-inspection of the actual result. Record why that evidence is sufficient when
-the choice would not be obvious to the implementer.
+If those conditions are not met, record why a new test is not justified and
+choose the most direct relevant alternative: an existing test that exercises
+the changed behavior, a static check, a build, a focused smoke check, or
+inspection of the actual result. State why that evidence can detect the primary
+failure mode; it must not be a generic check unrelated to the change.
 
 Never create a test whose main purpose is to record that this particular edit
 was made. Tests are durable behavior checks, not a duplicate change log.

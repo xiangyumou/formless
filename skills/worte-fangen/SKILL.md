@@ -19,6 +19,10 @@ Inspect the relevant project context before asking questions. Ask all currently
 known consequential questions in one numbered batch instead of revealing them
 one at a time.
 
+Use the runtime's native user-question tool when it is available. Otherwise,
+ask the batch in numbered text. The same rule applies to follow-up questions
+and the approval choice at each phase gate.
+
 For each question:
 
 - state the decision in concrete terms

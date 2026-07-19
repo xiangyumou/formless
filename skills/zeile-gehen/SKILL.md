@@ -27,12 +27,15 @@ only when isolation is actually needed. Preserve unrelated user changes.
    constraints, task ordering, interfaces, verification requirements, and
    escalation conditions.
 3. Raise genuine plan conflicts as one batched question with viable answers and
-   a recommendation. Otherwise proceed
+   a recommendation, using the runtime's native user-question tool when it is
+   available. Otherwise proceed
    continuously without asking for permission between tasks.
 4. Execute each coherent task as one deliverable. Do not turn its internal
    implementation and verification actions into separate tasks.
 5. Follow the plan's verification strategy. Add tests only when the plan's
-   test-value criteria are met; do not invent coverage work during execution.
+   test-value criteria are met; when no test is added, perform and record the
+   plan's targeted alternative verification. Do not invent coverage work during
+   execution.
 6. Inspect the diff after each task and record progress before continuing.
 
 Stop for missing authority, an unresolved blocker, a contradiction, or an

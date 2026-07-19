@@ -28,7 +28,8 @@ Subagent (general-purpose):
     - Dependencies or assumptions
     - Anything unclear in the task description
 
-    **Ask them now.** Raise any concerns before starting work.
+    Use the runtime's native user-question tool when it is available; otherwise,
+    raise one numbered question batch. Raise any concerns before starting work.
 
     ## Your Job
 
@@ -36,7 +37,9 @@ Subagent (general-purpose):
     1. Implement exactly what the task specifies
     2. Follow the task's verification strategy. Add a test only when it protects
        meaningful behavior, would catch a plausible regression for a useful
-       reason, and is worth its maintenance cost.
+       reason, remains stable across implementation changes, and is worth its
+       maintenance cost. When no test is added, perform and record the task's
+       targeted alternative verification.
     3. Verify implementation works
     4. Commit your work
     5. Self-review (see below)
@@ -44,7 +47,8 @@ Subagent (general-purpose):
 
     Work from: [directory]
 
-    **While you work:** If you encounter something unexpected or unclear, **ask questions**.
+    **While you work:** If you encounter something unexpected or unclear, use
+    the native user-question tool when it is available; otherwise ask in text.
     It's always OK to pause and clarify. Don't guess or make assumptions.
 
     While iterating, use the narrowest verification that gives useful feedback.
@@ -102,6 +106,8 @@ Subagent (general-purpose):
 
     **Verification:**
     - Did I follow the plan's verification strategy?
+    - When no test was added, did I record why and evidence that can detect the
+      task's primary realistic failure mode?
     - Would each new test catch a plausible regression for a useful reason?
     - Is each assertion stable enough to justify its maintenance cost?
     - Is command output free of relevant errors and warnings?

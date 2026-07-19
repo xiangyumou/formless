@@ -19,7 +19,8 @@ Check:
 - every requirement is implemented without unrequested scope
 - cross-task interfaces and integration are consistent
 - correctness, error handling, security, compatibility, and maintainability
-- reported verification would detect realistic failures
+- reported verification would detect realistic failures; when no test was
+  added, recorded alternative evidence would detect the primary failure mode
 - each new test protects meaningful behavior and justifies its maintenance cost
 - task-level Minor findings that should block completion
 
@@ -27,9 +28,6 @@ Do not repeat verification without a concrete reason. Distinguish defects from
 preferences and calibrate severity by actual impact.
 
 Output:
-
-## Strengths
-- [specific evidence]
 
 ## Findings
 

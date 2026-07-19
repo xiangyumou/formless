@@ -70,9 +70,10 @@ Each phase ends at an explicit user gate. Clean tasks inside an approved
 execution plan do not pause between steps. An obvious localized change may skip
 spec and plan, proceed directly, and end at the delivery gate.
 
-Plans preserve decisions that should not be rediscovered. Tests are added when
-they protect meaningful behavior and can catch a plausible regression;
-otherwise the agent uses the most direct relevant evidence.
+Plans preserve decisions that should not be rediscovered. Every behavior change
+has targeted verification. Tests are added when they protect meaningful behavior
+and can catch a plausible regression; otherwise the plan records why and uses
+alternative evidence that can detect the primary failure mode.
 
 ## Installation
 

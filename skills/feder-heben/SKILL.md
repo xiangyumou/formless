@@ -11,6 +11,13 @@ workflow that gives an unformed request enough structure to move forward.
 Skills are tools, not mandatory ceremony. Use the smallest workflow that adds
 material value, with user and repository instructions taking precedence.
 
+## Asking Questions
+
+When the runtime provides a native user-question tool, use it for consequential
+question batches and phase-gate choices. Otherwise, ask in numbered text with
+viable options, a recommendation, and a free-form alternative. Do not simulate
+a native question UI in plain text when the tool is available.
+
 ## Workflow
 
 Route work through the phases it actually needs:
