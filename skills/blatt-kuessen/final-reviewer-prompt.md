@@ -24,8 +24,15 @@ Check:
 - each new test protects meaningful behavior and justifies its maintenance cost
 - task-level Minor findings that should block completion
 
-Do not repeat verification without a concrete reason. Distinguish defects from
-preferences and calibrate severity by actual impact.
+Treat complete deterministic verification records for the reviewed commit as
+evidence that their commands ran with the reported result. Do not rerun the same
+command merely to confirm that result. Instead, judge whether the recorded
+command's scope and assertions cover the complete change.
+
+Repeat or request verification only when a record is incomplete, the code
+changed after it ran, it failed or was skipped, the result is nondeterministic
+or environment-dependent, or review identifies a concrete uncovered risk.
+Distinguish defects from preferences and calibrate severity by actual impact.
 
 Output:
 

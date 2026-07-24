@@ -75,6 +75,21 @@ For each task:
 Do not pause between clean tasks. Stop only for an unresolved blocker, a real
 plan conflict, missing authority, or completion of all tasks.
 
+## Objective Verification Evidence
+
+Treat a successful deterministic command as an established execution fact when
+the implementer records its exact command, commit, scope, exit status, result,
+and duration, and the recorded commit is the one under review. Do not rerun that
+same command merely to confirm that it succeeded. Instead, inspect the diff and
+the record to determine whether the command's scope and assertions actually
+cover the changed behavior.
+
+Repeat or request verification only when the record is incomplete, the code
+changed after it ran, the command failed or was skipped, the result is
+nondeterministic or environment-dependent, or code review identifies a concrete
+unanswered risk. This does not limit normal code review or lightweight focused
+checks.
+
 ## Model Selection
 
 Choose models by role, not by perceived task difficulty:

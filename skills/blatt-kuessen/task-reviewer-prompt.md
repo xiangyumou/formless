@@ -52,22 +52,32 @@ Subagent (general-purpose):
     Your review is read-only on this checkout. Do not mutate the working
     tree, the index, HEAD, or branch state in any way.
 
-    ## Do Not Trust the Report
+    ## Evaluate the Report
 
-    Treat the implementer's report as unverified claims about the code. It
-    may be incomplete, inaccurate, or optimistic. Verify the claims against
-    the diff. Design rationales in the report are claims too: "left it per
-    YAGNI," "kept it simple deliberately," or any other justification is the
-    implementer grading their own work. Judge the code on its merits — a
-    stated rationale never downgrades a finding's severity.
+    Treat implementation claims and design rationales in the report as
+    unverified: they may be incomplete, inaccurate, or optimistic. Verify them
+    against the diff. A stated rationale such as "left it per YAGNI" or "kept
+    it simple deliberately" never downgrades a finding's severity.
+
+    Treat a complete deterministic verification record as evidence that its
+    command ran with the recorded result when its exact command, commit, scope,
+    exit status, result, and duration are present and the commit matches the
+    diff under review. That establishes the execution fact, not whether the
+    command adequately covers the task.
 
     ## Verification
 
-    The implementer already followed the plan's verification strategy and
-    reported results for exactly this code. Do not repeat the same checks just
-    to confirm the report. Run a focused check only when reading the code raises
-    a concrete doubt that the report does not answer. If heavier validation
-    seems warranted, recommend it instead of running it.
+    Do not rerun a deterministic command with a complete record for the current
+    reviewed commit merely to confirm its reported result. Review the diff and
+    record to decide whether the command's scope and assertions cover the
+    changed behavior. Run a focused check only when reading the code raises a
+    concrete doubt that the record does not answer.
+
+    Repeat or request heavier validation only when the record is incomplete, the
+    code changed after the command ran, the command failed or was skipped, the
+    result is nondeterministic or environment-dependent, or a concrete risk is
+    not covered. If heavier validation seems warranted but is not necessary to
+    resolve a concrete doubt, recommend it instead of running it.
 
     Judge whether the chosen verification can catch a realistic failure of the
     required behavior. Do not request tests solely because production code

@@ -116,6 +116,20 @@ Subagent (general-purpose):
 
     If you find issues during self-review, fix them now before reporting.
 
+    ## Objective Verification Records
+
+    For each deterministic verification command that establishes an objective
+    result, including tests, builds, type checks, and linters, record:
+    - The exact command and arguments
+    - The commit SHA checked by that command
+    - Its scope, such as the package, test target, or full repository
+    - Exit status, result, relevant warnings or failures, and duration
+
+    Report failures, timeouts, and skipped commands exactly as they occurred.
+    Do not describe a command as passing when it did not complete successfully.
+    A reviewer may reuse a complete record for the same commit rather than rerun
+    the command, but will still judge whether it covers the changed behavior.
+
     ## After Review Findings
 
     If a reviewer finds issues and you fix them, repeat the focused verification
@@ -126,7 +140,8 @@ Subagent (general-purpose):
 
     Write your full report to [REPORT_FILE]:
     - What you implemented (or what you attempted, if blocked)
-    - Verification performed and results
+    - Verification performed and results, including objective verification
+      records for deterministic commands
     - Tests added, if any, and the behavior they protect
     - Files changed
     - Self-review findings (if any)
