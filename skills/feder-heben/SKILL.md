@@ -25,7 +25,8 @@ Route work through the phases it actually needs:
 1. Use `worte-fangen` to resolve consequential choices and produce a spec.
 2. After the user chooses planning, use `satz-meisseln` to turn that spec into
    an implementation plan.
-3. After the user chooses execution, use `blatt-kuessen` to execute the plan
+3. When the user asks to execute a plan, treat that request as approval of the
+   plan. Do not ask for a separate approval. Use `blatt-kuessen` to execute it
    with fresh implementers and independent review, or `zeile-gehen` to execute
    it directly.
 4. After execution, ask which delivery action comes next: review, commit, push,
@@ -39,8 +40,9 @@ wants next.
 
 Do not silently cross from spec to plan or from plan to execution. At the end of
 each phase, summarize the completed artifact, state the available next actions,
-and ask the user which action to take. Within a user-authorized execution plan,
-continue across clean tasks without pausing between them.
+and ask the user which action to take. A request to execute an existing plan is
+the execution choice and plan approval; do not reconfirm either. Continue across
+clean tasks without pausing between them.
 
 Do not load a process skill merely because the task is broadly related to its
 topic. Announce a selected skill briefly, then follow it unless a more specific

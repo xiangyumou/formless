@@ -14,16 +14,18 @@ or the user chooses inline execution.
 ## Workspace Preparation
 
 Read repository instructions and inspect the current branch, workspace, and
-uncommitted changes. Reuse a suitable workspace. Do not implement on `main` or
-`master` without explicit user permission; create a feature branch or worktree
-only when isolation is actually needed. Preserve unrelated user changes.
+uncommitted changes. Reuse a suitable workspace when it is already on a
+non-primary branch. When the current branch is `main` or `master`, create and
+switch to a feature branch before implementation without asking for separate
+permission. Execute directly on `main` or `master` only when the user explicitly
+requests it. Preserve unrelated user changes.
 
 ## Execution
 
-1. Verify that the plan and its source spec exist, their decisions are resolved,
-   and the user explicitly chose inline execution. Return to the appropriate
-   phase if an artifact is missing, a decision is unresolved, or execution was
-   not authorized.
+1. Verify that the plan and its source spec exist and their decisions are
+   resolved. Treat the request to execute the plan as approval; do not ask the
+   user to approve it again. Return to the appropriate phase only if an artifact
+   is missing or a decision is unresolved.
 2. Read the plan once, read the files in its context map, and check its
    constraints, task ordering, interfaces, verification requirements, and
    escalation conditions.

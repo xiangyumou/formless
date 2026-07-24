@@ -18,23 +18,24 @@ Before implementation:
 
 1. Read repository instructions and inspect the current branch, worktree, and
    working-tree status.
-2. Reuse an existing suitable workspace. Do not create a worktree merely
-   because this skill was invoked.
-3. Do not implement directly on `main` or `master` without explicit user
-   permission. When isolation is needed, prefer the harness's native worktree
-   capability; otherwise create a normal feature branch or project-local
-   worktree according to repository conventions.
+2. Reuse an existing suitable workspace when it is already on a non-primary
+   branch. Do not create a worktree merely because this skill was invoked.
+3. When the current branch is `main` or `master`, create and switch to a feature
+   branch before implementation without asking for separate permission. Execute
+   directly on `main` or `master` only when the user explicitly requests it.
+   When stronger isolation is needed, prefer the harness's native worktree
+   capability or a project-local worktree according to repository conventions.
 4. Preserve unrelated user changes. If they overlap the plan, work with them or
    ask when proceeding would be unsafe.
 5. Record the starting commit for task and final review ranges.
 
 ## Start
 
-Verify that the plan and its source spec exist, their decisions are resolved,
-and the user explicitly chose subagent-driven execution. If an artifact is
-missing, a decision is unresolved, or execution was not authorized, stop and
-return to the appropriate phase instead of reconstructing decisions during
-execution.
+Verify that the plan and its source spec exist and their decisions are resolved.
+Treat the request to execute the plan with subagents as approval; do not ask the
+user to approve it again. If an artifact is missing or a decision is unresolved,
+stop and return to the appropriate phase instead of reconstructing decisions
+during execution.
 
 Read the plan once. Read the files in its context map, then extract its tasks,
 global constraints, interfaces, verification requirements, and escalation

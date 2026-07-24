@@ -61,14 +61,18 @@ Formless does not require every phase for every request. The full workflow is:
 3. **Plan:** turn the resolved spec into a required-format implementation plan
    with global background and task-level context pointers, then ask the user to
    choose execution, revisions, or stop.
-4. **Execute:** after the user chooses an execution mode, run the plan
-   continuously with fresh subagents or directly.
+4. **Execute:** when the user asks to execute a plan, treat the request as plan
+   approval and run it continuously with fresh subagents or directly. Do not
+   ask for a separate approval.
 5. **Deliver:** report the completed work and ask whether to review, commit,
    push, open a pull request, or stop.
 
-Each phase ends at an explicit user gate. Clean tasks inside a user-authorized
-execution plan do not pause between steps. An obvious localized change may skip
-spec and plan, proceed directly, and end at the delivery gate.
+Each phase ends at an explicit user gate, but a request to execute an existing
+plan is itself the execution choice and approval. Clean tasks do not pause
+between steps. Plan execution defaults to a feature branch; it runs directly on
+`main` or `master` only when the user explicitly requests that. An obvious
+localized change may skip spec and plan, proceed directly, and end at the
+delivery gate.
 
 Plans preserve decisions that should not be rediscovered. Every behavior change
 has targeted verification. Tests are added when they protect meaningful behavior
@@ -119,8 +123,8 @@ and where to read further.
 - **Decisions survive handoff** — plans preserve judgment, not busywork.
 - **Questions arrive together** — consequential choices include viable answers
   and a recommendation.
-- **Phases require consent** — spec, plan, execution, and delivery have explicit
-  user gates.
+- **Phases require consent** — spec, plan, and delivery have explicit user
+  gates; asking to execute a plan supplies execution consent and approval.
 - **Evidence over claims** — completion requires relevant verification.
 - **Coherent units of work** — implementation, verification, and review stay
   aligned around useful deliverables.
