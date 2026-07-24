@@ -8,7 +8,7 @@
     {
       "name": "formless",
       "description": "A compact workflow for design, planning, model handoff, implementation, and review",
-      "version": "7.0.2",
+      "version": "7.0.3",
       "source": "./",
       "author": {
         "name": "xiangyumou"

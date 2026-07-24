@@ -51,9 +51,19 @@ Subagent (general-purpose):
     the native user-question tool when it is available; otherwise ask in text.
     It's always OK to pause and clarify. Don't guess or make assumptions.
 
-    While iterating, use the narrowest verification that gives useful feedback.
-    Run broader checks once before handoff when the plan or repository requires
-    them, not after every edit.
+    While iterating, prefer the narrowest verification that gives useful
+    feedback: a relevant test file, package, target, type check, or lint scope.
+    Do not run repository-wide builds, checks, or test suites after every small
+    edit. Unless a concrete cross-cutting risk or repository requirement makes
+    earlier broad validation useful, defer broader checks until the task is
+    complete and run them once before handoff when the plan or repository
+    requires them.
+
+    If a broad check fails, use focused checks while diagnosing and fixing the
+    failure instead of rerunning the entire check after every adjustment. Once
+    the fix is ready, rerun the broad check when needed to establish a final
+    trustworthy result. This is a strong default, not a prohibition: broaden
+    verification earlier when scoped checks cannot detect the realistic risk.
 
     ## Code Organization
 
