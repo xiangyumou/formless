@@ -5,8 +5,17 @@ description: Use when starting a conversation where the Formless software-develo
 
 # Feder heben
 
-Raise the quill. This is the entry point to Formless: choose the smallest
-workflow that gives an unformed request enough structure to move forward.
+## Invocation
+
+Begin the first user-facing progress update with exactly:
+
+> Raise the quill.
+
+Say it once. Do not repeat it after context compaction or at later phase
+transitions.
+
+The quill pauses above the page. Choose the smallest workflow that gives an
+unformed request enough structure to move forward.
 
 Skills are tools, not mandatory ceremony. Use the smallest workflow that adds
 material value, with user and repository instructions taking precedence.

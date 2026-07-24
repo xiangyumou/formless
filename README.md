@@ -6,6 +6,14 @@ Formless is a compact software-development workflow for coding agents. Five
 composable skills carry work from an unresolved idea to reviewed
 implementation without imposing process where a direct change is enough.
 
+Each movement opens with one line, spoken once:
+
+- **Feder heben:** "Raise the quill."
+- **Worte fangen:** "Catch the words before they scatter."
+- **Satz meisseln:** "Chisel the sentence until it holds."
+- **Blatt kuessen:** "Let the quill kiss the page."
+- **Zeile gehen:** "Walk the line to its end."
+
 ## The Five Movements
 
 ### 1. Feder heben · Raise the quill
@@ -45,6 +53,17 @@ Model selection follows the subagent's role: in Claude Code, implementers and
 all fix subagents use Sonnet, while task reviewers and the final reviewer use
 Opus. Other agent harnesses use models with equivalent implementation and
 review positioning.
+
+Execution gives each plan task two visible movements: **Set the line** for
+implementation, then **Read the line** for review and its fix/re-review loop.
+Explicit blockers keep the next line closed until the current one has been
+read cleanly. The controller owns both the runtime's native task view and the
+durable ledger; subagents leave immutable reports instead of maintaining global
+state themselves.
+
+The roles keep fixed names: a **Schreiber** implements, a **Lektor** reviews,
+and a **Korrektor** resolves findings. Task and round numbers make every agent
+and report traceable without breaking the shared language of the workflow.
 
 ### 5. Zeile gehen · Walk the line
 
@@ -116,6 +135,10 @@ multi_agent = true
 - Implementation plans: `docs/formless/plans/YYYY-MM-DD-<topic>.md`
 - Subagent execution state: `.formless/sdd/`
 
+Within `.formless/sdd/`, `progress.md` is the controller-owned ledger. Each
+`task-NN/` directory holds its brief and immutable implementation, review, fix,
+and diff artifacts; `final/` holds complete-change review rounds.
+
 Specs and plans use fixed heading order and required fields. Plans link to their
 resolved source spec. Global background explains the system and
 points to authoritative files; task context explains only what that task needs
@@ -130,6 +153,8 @@ and where to read further.
 - **Phases require consent** — spec, plan, and delivery have explicit user
   gates; asking to execute a plan supplies execution consent and approval.
 - **Evidence over claims** — completion requires relevant verification.
+- **The ledger remembers** — task state is updated at every dispatch and return,
+  not reconstructed after the work grows long.
 - **Coherent units of work** — implementation, verification, and review stay
   aligned around useful deliverables.
 - **Complexity reduction** — the workflow should leave the system simpler than

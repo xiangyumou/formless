@@ -5,6 +5,15 @@ description: Use for implementation planning after a Formless specification has 
 
 # Satz meisseln
 
+## Invocation
+
+Begin the first user-facing progress update with exactly:
+
+> Chisel the sentence until it holds.
+
+Say it once. Do not repeat it after context compaction or while refining the
+plan.
+
 ## Overview
 
 Chisel a resolved specification into a durable implementation plan that

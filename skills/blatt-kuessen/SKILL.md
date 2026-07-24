@@ -5,14 +5,22 @@ description: Use for subagent-driven development when executing an implementatio
 
 # Blatt kuessen
 
-Let the quill touch the blank page. Execute a written plan through fresh
-subagents, turning each coherent task into reviewed code.
+## Invocation
+
+Begin the first user-facing progress update with exactly:
+
+> Let the quill kiss the page.
+
+Say it once. Do not repeat it after context compaction or between tasks.
+
+The first mark turns intention into code. Execute a written plan through fresh
+subagents, one reviewed line at a time.
 
 Execute a written plan with a fresh implementer for each coherent task, an
 independent task review after each implementation, and one final review across
 the complete change.
 
-## Workspace Preparation
+## Prepare the Page
 
 Before implementation:
 
@@ -29,7 +37,7 @@ Before implementation:
    ask when proceeding would be unsafe.
 5. Record the starting commit for task and final review ranges.
 
-## Start
+## Read What Is Written
 
 Verify that the plan and its source spec exist and their decisions are resolved.
 Treat the request to execute the plan with subagents as approval; do not ask the
@@ -43,45 +51,89 @@ conditions. Scan for contradictions before Task 1 and present genuine conflicts
 as one batched question with viable answers and a recommendation, using the
 runtime's native user-question tool when it is available.
 
-Use one implementer dispatch per plan task. Do not split a coherent plan task
-into separate dispatches for testing, implementation, documentation, or
-committing.
+Use one implementation dispatch per plan task. Testing, documentation,
+verification, and committing remain inside that coherent implementation; the
+execution task list exposes responsibility and gates, not keystrokes.
 
-Track durable progress in `.formless/sdd/progress.md`. Record the user's
-selected execution mode, then resume from the first task not recorded as
-complete; trust the ledger and git history after context compaction.
+## The Ledger
 
-## Per-Task Loop
+The controller owns task state. Subagents report their own work but never create,
+complete, reorder, or otherwise maintain the global task list or
+`.formless/sdd/progress.md`.
 
-For each task:
+Before the first dispatch, resolve the artifact root with
+`scripts/sdd-workspace` and initialize its `progress.md` from
+`progress-template.md`. All `task-NN/` and `final/` paths below are relative to
+that root. When the runtime provides native task management, also create this
+live task view for every plan task:
 
-1. Record the current commit as `BASE`.
-2. Run `scripts/task-brief PLAN_FILE N`; use the generated file, which contains
-   the plan-wide background and the selected task, as the task's single source
-   of requirements.
-3. Dispatch a fresh implementer using `implementer-prompt.md`. Provide only the
-   brief path, necessary prior-task interfaces, workspace path, report path,
-   and context the brief cannot contain.
-4. Inspect the implementer's status and report. Never trust a completion claim
-   without checking the diff and verification evidence, including the recorded
-   alternative evidence when no test was added.
-5. Run `scripts/review-package BASE HEAD` and dispatch a fresh reviewer using
-   `task-reviewer-prompt.md`.
-6. Send Critical and Important findings to a fix subagent, repeat focused
-   verification, and re-review until both spec compliance and task quality are
-   approved.
-7. Record the task's commit range and clean review in the progress ledger.
+- `[TNN - Set the line] <plan task title>` - implementation
+- `[TNN - Read the line] <plan task title>` - review and its fix/re-review loop
+
+Make each `Read the line` task depend on its matching `Set the line` task. Make
+the next plan task's `Set the line` depend on the preceding `Read the line` task.
+Create `[Final - Read the page] Complete change`, blocked by the final plan
+task's `Read the line`. Use the native dependency mechanism when available;
+otherwise enforce the same order from the ledger.
+
+In Claude Code, encode these edges with the native `blockedBy` relationship (or
+its equivalent task-update field), not as prose in the task description. A
+blocked task remains pending until every recorded predecessor is complete.
+
+The native task list is the live view; the ledger is the durable workflow state;
+Git commits and immutable reports are the evidence. Before every dispatch,
+after every subagent return, and after context compaction, reconcile all three.
+Update the native task and ledger immediately at each transition. Never postpone
+task maintenance until the end of a long implementation.
+
+Every dispatch writes a new report. Never overwrite or append another agent's
+report; add each review and fix round to the ledger as a new history entry.
+
+Use native states such as `pending`, `in_progress`, and `completed` as provided
+by the runtime. In the ledger, record `PENDING`, `BLOCKED`, `IN_PROGRESS`,
+`COMPLETE`, or `NEEDS_ATTENTION`. A task with an unfinished predecessor remains
+pending and blocked. If records disagree, inspect Git and the named reports,
+repair the task view and ledger, and ask only when the evidence is genuinely
+ambiguous.
+
+## Set and Read Each Line
+
+For each plan task:
+
+1. Confirm its `Set the line` task is unblocked, mark it `in_progress`, record
+   the transition in the ledger, and record the current commit as `BASE`.
+2. Run `scripts/task-brief PLAN_FILE N`. Use the generated brief as the task's
+   single source of requirements.
+3. Dispatch `task_NN_schreiber` with `implementer-prompt.md`, the brief path,
+   necessary prior-task interfaces, workspace path, and
+   `task-NN/implement.md` report path.
+4. Inspect the Schreiber's status, commits, report, diff, and verification
+   evidence. When the implementation evidence is sound, mark `Set the line`
+   complete and immediately move the matching `Read the line` task to
+   `in_progress`.
+5. Generate `task-NN/review-RR.diff` for the fixed `BASE..HEAD` range. Dispatch
+   `task_NN_lektor_RR` with `task-reviewer-prompt.md` and
+   `task-NN/review-RR.md` as its report path. Give the Lektor the implementation
+   report and every prior fix report for this task.
+6. If Critical or Important findings remain, dispatch
+   `task_NN_korrektor_RR` with `fixer-prompt.md` and
+   `task-NN/fix-RR.md`. Check its commit and focused verification, regenerate a
+   fixed-SHA review package, increment the review round, and send a fresh Lektor.
+7. When both review verdicts are approved, record Minor findings for final
+   triage, mark `Read the line` complete in both task systems, and allow the next
+   blocked task to begin.
 
 Do not pause between clean tasks. Stop only for an unresolved blocker, a real
 plan conflict, missing authority, or completion of all tasks.
 
-## Objective Verification Evidence
+## Read the Evidence
 
 Treat a successful deterministic command as an established execution fact when
-the implementer records its exact command, commit, scope, exit status, result,
-and duration, and the recorded commit is the one under review. Do not rerun that
-same command merely to confirm that it succeeded. Instead, inspect the diff and
-the record to determine whether the command's scope and assertions actually
+the responsible Schreiber or Korrektor records its exact command, commit, scope,
+exit status, result, and duration. The recorded commit must be the reviewed head,
+or an ancestor whose later changes do not invalidate the result. Do not rerun
+that same command merely to confirm that it succeeded. Instead, inspect the diff
+and record to determine whether the command's scope and assertions actually
 cover the changed behavior.
 
 Repeat or request verification only when the record is incomplete, the code
@@ -90,7 +142,21 @@ nondeterministic or environment-dependent, or code review identifies a concrete
 unanswered risk. This does not limit normal code review or lightweight focused
 checks.
 
-## Model Selection
+## Name the Hands
+
+Use these exact subagent names when the harness supports names. When it supports
+only descriptions, begin the description with the same name:
+
+- `task_NN_schreiber` - the one implementation dispatch for plan Task NN
+- `task_NN_lektor_RR` - task reviewer for review round RR
+- `task_NN_korrektor_RR` - fixer for findings from review round RR
+- `werk_lektor_RR` - complete-change reviewer for final round RR
+- `werk_korrektor_RR` - fixer for findings from final round RR
+
+Use two-digit task and round numbers. Names identify responsibility and evidence;
+do not invent aliases or reuse a completed subagent for a different role.
+
+## Choose the Models
 
 Choose models by role, not by perceived task difficulty:
 
@@ -107,7 +173,7 @@ Never assign a review model based on implementation cost or simplicity, and
 never turn a fix into a review role because it is difficult. Always specify the
 subagent model explicitly when the harness supports it.
 
-## Implementer Status
+## Read the Schreiber's Return
 
 - `DONE`: package the diff and review it.
 - `DONE_WITH_CONCERNS`: read the concerns, resolve correctness or scope doubts,
@@ -116,10 +182,11 @@ subagent model explicitly when the harness supports it.
 - `BLOCKED`: diagnose whether the task needs context, a stronger model, a
   corrected plan, or human judgment. Do not retry unchanged.
 
-## Review Boundaries
+## Read the Margin
 
-Task review is scoped to the task brief and its diff. The reviewer receives the
-brief, implementer report, review package, and binding global constraints.
+Task review is scoped to the task brief and its diff. The Lektor receives the
+brief, implementation report, every prior fix report, review package, and
+binding global constraints.
 
 Do not ask reviewers to repeat verification without a concrete doubt. Do not
 pre-judge findings or tell reviewers what not to flag. A finding that conflicts
@@ -129,17 +196,24 @@ silently wins.
 Minor findings go into the progress ledger for final-review triage. Critical and
 Important findings block task completion.
 
-## Final Review
+## Read the Whole Page
 
 After all task reviews pass:
 
-1. Generate a review package from the recorded starting commit to `HEAD`.
-2. Dispatch one capable reviewer using `final-reviewer-prompt.md`, including the
-   plan path, review package, verification summaries, and recorded Minor items.
-3. If findings require fixes, dispatch one fix subagent with the complete list,
-   repeat the affected verification, regenerate the package, and re-review.
+1. Move `[Final - Read the page] Complete change` to `in_progress` in the native
+   task view and ledger. Generate `final/review-RR.diff` for the fixed starting
+   commit through the current `HEAD`.
+2. Dispatch `werk_lektor_RR` with `final-reviewer-prompt.md`, the plan path,
+   review package, verification summaries, recorded Minor items, and
+   `final/review-RR.md` as its report path.
+3. If findings require fixes, dispatch `werk_korrektor_RR` with
+   `fixer-prompt.md`, the complete finding list, and `final/fix-RR.md`. Check its
+   commit and focused verification, regenerate the fixed-SHA package, increment
+   the round, and send a fresh `werk_lektor_RR`.
+4. Mark the final task complete only when the complete-change verdict is Ready
+   and its report is recorded in the ledger.
 
-## Completion
+## Close the Work
 
 Run the final verification required by the plan and any focused checks required
 by review findings. Do not replace the plan's proportional verification with an
@@ -165,7 +239,9 @@ changes unless the user explicitly requests that action.
 
 - `implementer-prompt.md`: task implementer contract
 - `task-reviewer-prompt.md`: per-task spec and quality review
+- `fixer-prompt.md`: task and final finding-resolution contract
 - `final-reviewer-prompt.md`: complete-change review
+- `progress-template.md`: durable controller-owned ledger template
 - `scripts/task-brief`: task extraction
 - `scripts/review-package`: review artifact generation
 - `scripts/sdd-workspace`: shared artifact workspace

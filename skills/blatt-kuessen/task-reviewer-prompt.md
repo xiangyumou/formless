@@ -9,14 +9,15 @@ more, nothing less) and is well-built (clean, verified, maintainable)
 
 ```
 Subagent (general-purpose):
-  description: "Review Task N (spec + quality)"
+  name: task_NN_lektor_RR
+  description: "task_NN_lektor_RR - Read Task N against its brief"
   model: [MODEL — REQUIRED: choose per SKILL.md Model Selection; an omitted
          model silently inherits the session's most expensive one]
   prompt: |
-    You are reviewing one task's implementation: first whether it matches its
-    requirements, then whether it is well-built. This is a task-scoped gate,
-    not a merge review — a broad whole-branch review happens separately after
-    all tasks are complete.
+    You are the Lektor for Task N. Read what was written, not what was intended:
+    first whether it matches its requirements, then whether it is well-built.
+    This is a task-scoped gate, not a merge review — the whole page will be read
+    separately after all tasks are complete.
 
     ## What Was Requested
 
@@ -25,9 +26,10 @@ Subagent (general-purpose):
     Global constraints from the spec/design that bind this task:
     [GLOBAL_CONSTRAINTS]
 
-    ## What the Implementer Claims They Built
+    ## The Hands That Wrote It
 
-    Read the implementer's report: [REPORT_FILE]
+    Read the implementation report: [IMPLEMENT_REPORT_FILE]
+    Read every prior fix report, or `None`: [FIX_REPORT_FILES]
 
     ## Diff Under Review
 
@@ -49,29 +51,30 @@ Subagent (general-purpose):
     lock ordering, a function or API contract, or shared mutable state,
     checking the call sites is the right method.
 
-    Your review is read-only on this checkout. Do not mutate the working
-    tree, the index, HEAD, or branch state in any way.
+    Your review is read-only on this checkout. Do not mutate the working tree,
+    index, HEAD, branch, native task list, or `progress.md` in any way.
 
-    ## Evaluate the Report
+    ## Evaluate the Reports
 
-    Treat implementation claims and design rationales in the report as
+    Treat implementation claims and design rationales in the reports as
     unverified: they may be incomplete, inaccurate, or optimistic. Verify them
     against the diff. A stated rationale such as "left it per YAGNI" or "kept
     it simple deliberately" never downgrades a finding's severity.
 
     Treat a complete deterministic verification record as evidence that its
     command ran with the recorded result when its exact command, commit, scope,
-    exit status, result, and duration are present and the commit matches the
-    diff under review. That establishes the execution fact, not whether the
-    command adequately covers the task.
+    exit status, result, and duration are present. Its commit must be the
+    reviewed head, or an ancestor whose later changes do not invalidate the
+    result. That establishes the execution fact, not whether the command
+    adequately covers the task.
 
     ## Verification
 
-    Do not rerun a deterministic command with a complete record for the current
-    reviewed commit merely to confirm its reported result. Review the diff and
-    record to decide whether the command's scope and assertions cover the
-    changed behavior. Run a focused check only when reading the code raises a
-    concrete doubt that the record does not answer.
+    Do not rerun a deterministic command with a complete record that remains
+    applicable to the reviewed head merely to confirm its reported result.
+    Review the diff and record to decide whether the command's scope and
+    assertions cover the changed behavior. Run a focused check only when reading
+    the code raises a concrete doubt that the record does not answer.
 
     Repeat or request heavier validation only when the record is incomplete, the
     code changed after the command ran, the command failed or was skipped, the
@@ -128,10 +131,8 @@ Subagent (general-purpose):
     "yes." A tight report that cites lines gives the controller everything
     it needs.
 
-    Your final message is the report itself: begin directly with the
-    spec-compliance verdict. Every line is a verdict, a finding with
-    file:line, or a check you ran — no preamble, no process narration,
-    no closing summary.
+    Keep the persisted report tight: every line is a verdict, a finding with a
+    file:line reference, or a check you ran. Add no process narration.
 
     ## Calibration
 
@@ -170,9 +171,17 @@ Subagent (general-purpose):
     **Task quality:** [Approved | Needs fixes]
 
     **Reasoning:** [1-2 sentence technical assessment]
+
+    Write this complete report to [REVIEW_REPORT_FILE]. The report belongs to
+    this review round; do not overwrite an earlier round. Then return only:
+    - **Verdict:** Approved | Needs fixes
+    - Finding counts by severity
+    - The review report path
 ```
 
 **Placeholders:**
+- `[NN]` — two-digit task number used in the fixed agent name
+- `[RR]` — two-digit review round used in the fixed agent name and report path
 - `[MODEL]` — REQUIRED: reviewer model per SKILL.md Model Selection
 - `[BRIEF_FILE]` — REQUIRED: the task brief file (`scripts/task-brief PLAN N`
   prints the path; same file the implementer worked from)
@@ -180,13 +189,16 @@ Subagent (general-purpose):
   the plan's Global Constraints section or the spec: exact values, formats,
   and stated relationships between components (not process rules — those
   are already in this template)
-- `[REPORT_FILE]` — REQUIRED: the file the implementer wrote its detailed
-  report to
+- `[IMPLEMENT_REPORT_FILE]` — REQUIRED: immutable implementation report
+- `[FIX_REPORT_FILES]` — all immutable prior Korrektor reports for this task,
+  ordered by round, or `None`
 - `[BASE_SHA]` — commit before this task
 - `[HEAD_SHA]` — current commit
 - `[DIFF_FILE]` — REQUIRED: the path the controller wrote the review
   package to (`scripts/review-package BASE HEAD` prints the unique path it
   wrote; the package never enters the controller's context)
+- `[REVIEW_REPORT_FILE]` — REQUIRED: immutable report path for this round,
+  `task-NN/review-RR.md`
 
 **Reviewer returns:** Spec Compliance verdict (✅/❌/⚠️), Issues
 (Critical/Important/Minor), Task quality verdict

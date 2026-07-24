@@ -4,11 +4,13 @@ Use this template when dispatching an implementer subagent.
 
 ```
 Subagent (general-purpose):
-  description: "Implement Task N: [task name]"
+  name: task_NN_schreiber
+  description: "task_NN_schreiber - Set Task N to the page: [task name]"
   model: [MODEL — REQUIRED: choose per SKILL.md Model Selection; an omitted
          model silently inherits the session's most expensive one]
   prompt: |
-    You are implementing Task N: [task name]
+    You are the Schreiber for Task N: [task name]. Set this one line down
+    cleanly, and leave a faithful record of the hand that wrote it.
 
     ## Task Description
 
@@ -46,6 +48,9 @@ Subagent (general-purpose):
     6. Report back
 
     Work from: [directory]
+
+    Do not update the native task list or `progress.md`; the controller owns the
+    ledger.
 
     **While you work:** If you encounter something unexpected or unclear, use
     the native user-question tool when it is available; otherwise ask in text.
@@ -137,14 +142,9 @@ Subagent (general-purpose):
 
     Report failures, timeouts, and skipped commands exactly as they occurred.
     Do not describe a command as passing when it did not complete successfully.
-    A reviewer may reuse a complete record for the same commit rather than rerun
-    the command, but will still judge whether it covers the changed behavior.
-
-    ## After Review Findings
-
-    If a reviewer finds issues and you fix them, repeat the focused verification
-    covering the amended code and append the results to your report file.
-    Reviewers will not repeat checks for you; your report is the evidence.
+    A reviewer may reuse a complete record for this commit, including after a
+    later fix that does not invalidate it, but will still judge whether it
+    covers the changed behavior.
 
     ## Report Format
 
@@ -156,6 +156,10 @@ Subagent (general-purpose):
     - Files changed
     - Self-review findings (if any)
     - Any issues or concerns
+
+    This report belongs to this dispatch. Write it once and do not append later
+    review or fix work to it. A Korrektor receives a new report path for every
+    revision round.
 
     Then report back with ONLY (under 15 lines — the detail lives in the
     report file):

@@ -5,8 +5,16 @@ description: Use for direct plan execution when following a written implementati
 
 # Zeile gehen
 
-Walk the line already set down. Execute a written implementation plan directly,
-one coherent deliverable at a time.
+## Invocation
+
+Begin the first user-facing progress update with exactly:
+
+> Walk the line to its end.
+
+Say it once. Do not repeat it after context compaction or between tasks.
+
+Follow what has already been set down. Execute a written implementation plan
+directly, one coherent deliverable at a time.
 
 Execute a written plan directly when subagent-driven development is unavailable
 or the user chooses inline execution.

@@ -4,8 +4,7 @@
 # through the controller's context.
 #
 # Usage: task-brief PLAN_FILE TASK_NUMBER [OUTFILE]
-# Default OUTFILE: <repo-root>/.formless/sdd/task-<N>-brief.md
-# (per worktree; concurrent runs in the same working tree share it).
+# Default OUTFILE: <repo-root>/.formless/sdd/task-<NN>/brief.md
 set -euo pipefail
 
 if [ $# -lt 2 ] || [ $# -gt 3 ]; then
@@ -17,12 +16,24 @@ plan=$1
 n=$2
 [ -f "$plan" ] || { echo "no such plan file: $plan" >&2; exit 2; }
 
+if [[ ! $n =~ ^[0-9]+$ ]]; then
+  echo "task number must be a positive integer: $n" >&2
+  exit 2
+fi
+if (( 10#$n < 1 )); then
+  echo "task number must be a positive integer: $n" >&2
+  exit 2
+fi
+task_id=$(printf '%02d' "$((10#$n))")
+
 if [ $# -eq 3 ]; then
   out=$3
 else
   dir=$("$(cd "$(dirname "$0")" && pwd)/sdd-workspace")
-  out="$dir/task-${n}-brief.md"
+  out="$dir/task-${task_id}/brief.md"
 fi
+
+mkdir -p "$(dirname "$out")"
 
 if ! awk -v n="$n" '
   /^```/ { infence = !infence }

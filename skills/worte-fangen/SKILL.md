@@ -5,9 +5,17 @@ description: Use for brainstorming when a proposed feature or behavior change ha
 
 # Worte fangen
 
-Catch the words before they disappear. Resolve consequential choices and turn
-an unformed idea into a specification whose resolved decisions can guide the
-next phase.
+## Invocation
+
+Begin the first user-facing progress update with exactly:
+
+> Catch the words before they scatter.
+
+Say it once. Do not repeat it after context compaction or within later question
+batches.
+
+Gather what is still unformed. Resolve consequential choices and turn the idea
+into a specification whose decisions can guide the next phase.
 
 This workflow is for decisions, not ceremony. If intent, behavior, constraints,
 and implementation direction are already clear and the change is localized,

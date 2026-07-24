@@ -27,6 +27,8 @@ else
   out="$dir/review-$(git rev-parse --short "$base")..$(git rev-parse --short "$head").diff"
 fi
 
+mkdir -p "$(dirname "$out")"
+
 {
   echo "# Review package: ${base}..${head}"
   echo

@@ -7,7 +7,9 @@ Add to your Codex config (`~/.codex/config.toml`):
 multi_agent = true
 ```
 
-This enables `spawn_agent`, `wait_agent`, and `close_agent` for `blatt-kuessen`. Close implementer and reviewer subagents when they have finished their work.
+This enables `spawn_agent`, `wait_agent`, and `close_agent` for `blatt-kuessen`.
+Close Schreiber, Lektor, and Korrektor subagents when they have finished their
+work.
 
 ## Environment Detection
 
