@@ -1,16 +1,16 @@
 # Task Reviewer Prompt Template
 
-Use this template when dispatching a task reviewer subagent. The reviewer
-reads the task's diff once and returns two verdicts: spec compliance and
-code quality.
+Use the full template for a task's first review. Record the returned agent ID,
+then use the re-review follow-up below to resume that same reviewer after fixes.
+The reviewer returns two verdicts: spec compliance and code quality.
 
 **Purpose:** Verify one task's implementation matches its requirements (nothing
 more, nothing less) and is well-built (clean, verified, maintainable)
 
 ```
 Subagent (general-purpose):
-  name: task_NN_lektor_RR
-  description: "task_NN_lektor_RR - Read Task N against its brief"
+  name: task_NN_lektor
+  description: "task_NN_lektor - Read Task N against its brief"
   model: [MODEL — REQUIRED: choose per SKILL.md Model Selection; an omitted
          model silently inherits the session's most expensive one]
   prompt: |
@@ -53,6 +53,11 @@ Subagent (general-purpose):
 
     Your review is read-only on this checkout. Do not mutate the working tree,
     index, HEAD, branch, native task list, or `progress.md` in any way.
+
+    Work independently and save routine progress for the final report. Use
+    native agent messaging during the review only if missing evidence blocks the
+    review, the plan is invalid, or you find a consequential conflict that the
+    controller must resolve (`main` is the controller address in Claude Code).
 
     ## Evaluate the Reports
 
@@ -179,9 +184,47 @@ Subagent (general-purpose):
     - The review report path
 ```
 
+## Re-review Follow-up
+
+Send this message to the recorded Lektor agent ID after a Korrektor finishes.
+Target the ID rather than the display name. The resumed Lektor already has the
+first-round prompt, reports, tool results, and reasoning in its transcript.
+
+```
+SendMessage:
+  to: [LEKTOR_AGENT_ID]
+  message: |
+    Return to Task N as its same Lektor for review round RR. The marked lines
+    have been revised; preserve your earlier context, but judge the current
+    fixed-SHA evidence rather than defending your prior verdict.
+
+    Read the new fix report: [FIX_REPORT_FILE]
+    Read any other fix reports added since your last review: [NEW_FIX_REPORT_FILES]
+
+    **Base:** [BASE_SHA]
+    **Head:** [HEAD_SHA]
+    **Diff file:** [DIFF_FILE]
+
+    Re-check every unresolved Critical and Important finding against the current
+    diff, then inspect the affected delta for regressions or incomplete fixes.
+    Apply the same spec-compliance, code-quality, verification-evidence, severity,
+    and read-only rules from your original assignment. Do not mechanically repeat
+    checks whose complete objective records remain valid.
+
+    Write a new immutable report to [REVIEW_REPORT_FILE] using the original output
+    format. Do not overwrite an earlier round. Then return only the verdict,
+    finding counts by severity, and report path.
+```
+
+If resumption is unavailable or fails, dispatch a replacement with the full
+template and provide the complete implementation, review, and fix report chain.
+Record the replacement agent ID before continuing.
+
 **Placeholders:**
 - `[NN]` — two-digit task number used in the fixed agent name
-- `[RR]` — two-digit review round used in the fixed agent name and report path
+- `[RR]` — two-digit review round used in the report path
+- `[LEKTOR_AGENT_ID]` — actual harness ID captured from the first dispatch or
+  latest replacement; use this, not the display name, for resumption
 - `[MODEL]` — REQUIRED: reviewer model per SKILL.md Model Selection
 - `[BRIEF_FILE]` — REQUIRED: the task brief file (`scripts/task-brief PLAN N`
   prints the path; same file the implementer worked from)
@@ -199,6 +242,9 @@ Subagent (general-purpose):
   wrote; the package never enters the controller's context)
 - `[REVIEW_REPORT_FILE]` — REQUIRED: immutable report path for this round,
   `task-NN/review-RR.md`
+- `[FIX_REPORT_FILE]` — fix report that triggered this re-review
+- `[NEW_FIX_REPORT_FILES]` — any additional reports created since the Lektor's
+  previous round, ordered by creation, or `None`
 
 **Reviewer returns:** Spec Compliance verdict (✅/❌/⚠️), Issues
 (Critical/Important/Minor), Task quality verdict

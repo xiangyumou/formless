@@ -42,6 +42,11 @@ Subagent (general-purpose):
     Do not update the native task list or `progress.md`; the controller owns the
     ledger.
 
+    Work independently and save routine progress for the final report. Use
+    native agent messaging during the dispatch only for a blocker, an invalidated
+    plan, a consequential conflict, or a discovery that changes another task
+    (`main` is the controller address in Claude Code).
+
     ## Report
 
     Write an immutable report to [FIX_REPORT_FILE]:

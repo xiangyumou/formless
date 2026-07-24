@@ -30,8 +30,10 @@ Subagent (general-purpose):
     - Dependencies or assumptions
     - Anything unclear in the task description
 
-    Use the runtime's native user-question tool when it is available; otherwise,
-    raise one numbered question batch. Raise any concerns before starting work.
+    Send one batched message to the controller through native agent messaging
+    when it is available (`main` in Claude Code); otherwise return
+    `NEEDS_CONTEXT` with the numbered questions. Raise consequential concerns
+    before starting work.
 
     ## Your Job
 
@@ -52,9 +54,12 @@ Subagent (general-purpose):
     Do not update the native task list or `progress.md`; the controller owns the
     ledger.
 
-    **While you work:** If you encounter something unexpected or unclear, use
-    the native user-question tool when it is available; otherwise ask in text.
-    It's always OK to pause and clarify. Don't guess or make assumptions.
+    **While you work:** Work independently and save routine progress for the
+    final report. If you hit a blocker, discover that the plan is invalid, find
+    a consequential requirement or design conflict, or learn something that
+    changes another task, notify the controller through native agent messaging
+    when available (`main` in Claude Code). Otherwise return BLOCKED or
+    NEEDS_CONTEXT with the issue. Do not guess or make assumptions.
 
     While iterating, prefer the narrowest verification that gives useful
     feedback: a relevant test file, package, target, type check, or lint scope.

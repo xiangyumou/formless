@@ -13,12 +13,12 @@ Begin the first user-facing progress update with exactly:
 
 Say it once. Do not repeat it after context compaction or between tasks.
 
-The first mark turns intention into code. Execute a written plan through fresh
+The first mark turns intention into code. Execute a written plan through named
 subagents, one reviewed line at a time.
 
 Execute a written plan with a fresh implementer for each coherent task, an
-independent task review after each implementation, and one final review across
-the complete change.
+independent task Lektor whose context is preserved through that task's
+fix/re-review loop, and one fresh final review across the complete change.
 
 ## Prepare the Page
 
@@ -112,16 +112,29 @@ For each plan task:
    complete and immediately move the matching `Read the line` task to
    `in_progress`.
 5. Generate `task-NN/review-RR.diff` for the fixed `BASE..HEAD` range. Dispatch
-   `task_NN_lektor_RR` with `task-reviewer-prompt.md` and
+   `task_NN_lektor` with `task-reviewer-prompt.md` and
    `task-NN/review-RR.md` as its report path. Give the Lektor the implementation
-   report and every prior fix report for this task.
+   report and every prior fix report for this task. Capture the actual agent ID
+   returned by the harness immediately and write it to the ledger; the fixed
+   name expresses the role, but the ID is the durable resumption handle.
 6. If Critical or Important findings remain, dispatch
    `task_NN_korrektor_RR` with `fixer-prompt.md` and
    `task-NN/fix-RR.md`. Check its commit and focused verification, regenerate a
-   fixed-SHA review package, increment the review round, and send a fresh Lektor.
+   fixed-SHA review package, and increment the review round. When the harness
+   supports resumption, send the re-review follow-up from
+   `task-reviewer-prompt.md` to the recorded Lektor agent ID. Resume that same
+   Lektor for every round of this task so it retains the original brief,
+   findings, tool evidence, and reasoning.
 7. When both review verdicts are approved, record Minor findings for final
    triage, mark `Read the line` complete in both task systems, and allow the next
    blocked task to begin.
+
+Never rely on a display name to resume a completed subagent when an agent ID is
+available. If the ID is missing, the harness cannot resume it, or resumption
+fails, dispatch a replacement Lektor with the full task brief, implementation
+report, complete review/fix report chain, and current review package. Record the
+replacement's ID and the fallback in the ledger, then resume that replacement
+for later rounds when possible.
 
 Do not pause between clean tasks. Stop only for an unresolved blocker, a real
 plan conflict, missing authority, or completion of all tasks.
@@ -148,13 +161,14 @@ Use these exact subagent names when the harness supports names. When it supports
 only descriptions, begin the description with the same name:
 
 - `task_NN_schreiber` - the one implementation dispatch for plan Task NN
-- `task_NN_lektor_RR` - task reviewer for review round RR
+- `task_NN_lektor` - task reviewer retained across every review round for Task NN
 - `task_NN_korrektor_RR` - fixer for findings from review round RR
 - `werk_lektor_RR` - complete-change reviewer for final round RR
 - `werk_korrektor_RR` - fixer for findings from final round RR
 
-Use two-digit task and round numbers. Names identify responsibility and evidence;
-do not invent aliases or reuse a completed subagent for a different role.
+Use two-digit task and round numbers. Names identify responsibility; immutable
+report paths identify rounds; harness agent IDs identify resumable transcripts.
+Do not invent aliases or reuse a completed subagent for a different role.
 
 ## Choose the Models
 
@@ -195,6 +209,16 @@ silently wins.
 
 Minor findings go into the progress ledger for final-review triage. Critical and
 Important findings block task completion.
+
+## Speak When the Line Breaks
+
+Subagents normally work independently and return one complete report when their
+dispatch ends. Do not turn routine progress into a stream of messages. When the
+harness supports agent-to-controller messaging, contact the controller during a
+dispatch only for a blocker, an invalidated plan, a consequential requirement or
+design conflict, or a discovery that changes another task. In Claude Code, send
+that exceptional message to `main`; ordinary completion still uses the normal
+return and immutable report.
 
 ## Read the Whole Page
 

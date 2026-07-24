@@ -62,8 +62,10 @@ durable ledger; subagents leave immutable reports instead of maintaining global
 state themselves.
 
 The roles keep fixed names: a **Schreiber** implements, a **Lektor** reviews,
-and a **Korrektor** resolves findings. Task and round numbers make every agent
-and report traceable without breaking the shared language of the workflow.
+and a **Korrektor** resolves findings. Each task keeps the same Lektor through
+its fix/re-review loop when the harness can resume an agent; the durable ledger
+records the real agent ID while immutable reports record each review round. A
+fresh **Werk Lektor** still reads the complete change independently.
 
 ### 5. Zeile gehen · Walk the line
 
@@ -85,7 +87,7 @@ Formless does not require every phase for every request. The full workflow is:
    with global background and task-level context pointers, then ask the user to
    choose execution, revisions, or stop.
 4. **Execute:** when the user asks to execute a plan, treat the request as plan
-   approval and run it continuously with fresh subagents or directly. Do not
+   approval and run it continuously with subagents or directly. Do not
    ask for a separate approval.
 5. **Deliver:** report the completed work and ask whether to review, commit,
    push, open a pull request, or stop.

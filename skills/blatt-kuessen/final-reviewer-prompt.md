@@ -22,6 +22,11 @@ Subagent (general-purpose):
     Read the plan and complete fixed-SHA diff. This is a read-only review; do
     not change the working tree, index, commits, task list, ledger, or branch.
 
+    Work independently and save routine progress for the final report. Use
+    native agent messaging during the review only if missing evidence blocks the
+    review, the plan is invalid, or you find a consequential conflict that the
+    controller must resolve (`main` is the controller address in Claude Code).
+
     Check:
     - every requirement is implemented without unrequested scope
     - cross-task interfaces and integration are consistent
