@@ -71,23 +71,34 @@ direction idiomatically. Specify outcomes and guardrails, not keystrokes.
 
 ## Task Boundaries
 
-A task is one coherent deliverable worth handing to a fresh implementer and
-reviewing on its own.
+A task is the smallest coherent, reviewable change that produces one primary
+outcome or one stable interface. It should be worth handing to a fresh
+implementer and assessing through one focused review verdict.
+
+A task may depend on earlier tasks and does not need to provide standalone user
+value. It must leave behind a concrete result that a later task can consume or
+a reviewer can evaluate.
 
 Group the implementation, its appropriate verification, and closely related
-configuration or documentation into the same task. Writing a test, running it,
-changing code, running checks, and committing are execution details, not
-separate tasks or plan steps.
+configuration or documentation for the same outcome into one task. Do not split
+tasks by workflow mechanics, file boundaries, or coding steps. Writing a test,
+running it, changing code, running checks, and committing are execution details,
+not separate tasks or plan steps.
 
-Split only when at least one is true:
+Split when at least one is true:
 
-- the pieces produce independently useful behavior
-- they touch distinct components with a clear interface
-- they can be implemented and reviewed independently
-- separation materially reduces context or risk
+- the task contains more than one primary outcome or needs separate review
+  verdicts
+- its parts touch distinct components with a stable interface between them
+- its parts have materially different risks or verification strategies
+- the implementer would need to load several unrelated areas of the codebase
+- the expected context or diff cannot be assessed effectively in one focused
+  review
+- separation materially reduces context, integration risk, or rework
 
 Avoid plans with many tiny tasks. A small feature may be one task. A complex
-feature should have as few tasks as its real dependency structure allows.
+feature should have as few well-sized tasks as its dependency, context, and
+review boundaries allow. Do not optimize for the lowest task count.
 
 ## Verification Strategy
 
@@ -168,7 +179,7 @@ minimum context needed to understand the plan.]
 
 **Outcome:**
 
-[Observable result produced by this task.]
+[One primary observable result or stable interface produced by this task.]
 
 **Context:**
 
@@ -206,14 +217,20 @@ step and decision boundary explicit.
 Before handoff, check:
 
 1. Every requirement maps to a task.
-2. Tasks are coherent deliverables rather than workflow fragments.
-3. Cross-task names, types, and ordering agree.
-4. Verification is proportionate and would detect a real failure.
-5. No consequential choice has been silently delegated to the implementer.
-6. No instruction dictates routine mechanics without reducing meaningful risk.
-7. A capable implementer can distinguish freedom within the plan from a reason
+2. Each task has one primary outcome or stable interface and one focused review
+   verdict.
+3. No task combines independent behaviors merely to minimize task count.
+4. No task requires unrelated code areas or materially different verification
+   strategies when a stable boundary permits a split.
+5. Tasks are coherent deliverables rather than workflow fragments, file lists,
+   or execution steps.
+6. Cross-task names, types, and ordering agree.
+7. Verification is proportionate and would detect a real failure.
+8. No consequential choice has been silently delegated to the implementer.
+9. No instruction dictates routine mechanics without reducing meaningful risk.
+10. A capable implementer can distinguish freedom within the plan from a reason
    to escalate.
-8. The background and context map identify authoritative files without copying
+11. The background and context map identify authoritative files without copying
    their contents into every task.
-9. Every fixed-format heading is present and the source spec's decisions are
+12. Every fixed-format heading is present and the source spec's decisions are
    resolved.
