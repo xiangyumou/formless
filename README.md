@@ -41,6 +41,10 @@ fragmenting coherent work into ceremonial steps.
 The first touch turns possibility into code. `blatt-kuessen` gives each
 coherent plan task to a fresh implementer, checks the resulting evidence, and
 uses independent task and final review before declaring the work complete.
+Model selection follows the subagent's role: in Claude Code, implementers and
+all fix subagents use Sonnet, while task reviewers and the final reviewer use
+Opus. Other agent harnesses use models with equivalent implementation and
+review positioning.
 
 ### 5. Zeile gehen · Walk the line
 

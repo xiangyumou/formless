@@ -82,8 +82,10 @@ Subagent (general-purpose):
 
     **How to escalate:** Report back with status BLOCKED or NEEDS_CONTEXT. Describe
     specifically what you're stuck on, what you've tried, and what kind of help you need.
-    The controller can provide more context, re-dispatch with a more capable model,
-    or break the task into smaller pieces.
+    The controller can provide more context, re-dispatch with another
+    implementation-role model allowed by SKILL.md, or return to the plan when the
+    task needs to be re-scoped. Do not switch an implementation task to a review
+    model.
 
     ## Before Reporting Back: Self-Review
 

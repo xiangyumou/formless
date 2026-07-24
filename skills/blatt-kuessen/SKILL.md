@@ -77,16 +77,20 @@ plan conflict, missing authority, or completion of all tasks.
 
 ## Model Selection
 
-Choose models by the judgment required:
+Choose models by role, not by perceived task difficulty:
 
-- Mechanical work with complete instructions: fast model.
-- Cross-file integration or incomplete prose instructions: standard model.
-- Architecture, ambiguity resolution, and final review: most capable available
-  model.
-- Review: never use a model too weak to distinguish plan compliance from sound
-  engineering judgment.
+- Implementation roles include every task implementer, every subagent fixing
+  task-review findings, and every subagent fixing final-review findings. In
+  Claude Code, use Sonnet for all implementation roles.
+- Review roles include every task reviewer and the final reviewer. In Claude
+  Code, use Opus for all review roles.
+- In other agent harnesses, use the model with the equivalent positioning:
+  the Sonnet-equivalent implementation model for implementation and fixes, and
+  the Opus-equivalent highest-capability reasoning model for every review.
 
-Always specify the subagent model explicitly when the harness supports it.
+Never assign a review model based on implementation cost or simplicity, and
+never turn a fix into a review role because it is difficult. Always specify the
+subagent model explicitly when the harness supports it.
 
 ## Implementer Status
 
