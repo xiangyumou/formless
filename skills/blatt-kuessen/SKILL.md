@@ -187,6 +187,19 @@ Never assign a review model based on implementation cost or simplicity, and
 never turn a fix into a review role because it is difficult. Always specify the
 subagent model explicitly when the harness supports it.
 
+## Model Gate
+
+Before every dispatch, name the role and set its model explicitly. In Claude
+Code, this gate is mandatory:
+
+- `Schreiber` and every `Korrektor`: `model: Sonnet`
+- `Lektor` and every `Werk Lektor`: `model: Opus`
+
+This includes replacement agents and every new final-review round. A dispatch
+with an omitted model is invalid: do not let it inherit the controller's model;
+correct the dispatch before sending it. Do not use Opus to implement or fix, and
+do not use Sonnet to review, even when the task looks small or difficult.
+
 ## Read the Schreiber's Return
 
 - `DONE`: package the diff and review it.

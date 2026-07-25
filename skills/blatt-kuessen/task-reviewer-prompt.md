@@ -11,10 +11,10 @@ more, nothing less) and is well-built (clean, verified, maintainable)
 Subagent (general-purpose):
   name: task_NN_lektor
   description: "task_NN_lektor - Read Task N against its brief"
-  model: [MODEL — REQUIRED: choose per SKILL.md Model Selection; an omitted
-         model silently inherits the session's most expensive one]
+  model: Opus  # REQUIRED in Claude Code; use the equivalent review model elsewhere
   prompt: |
-    You are the Lektor for Task N. Read what was written, not what was intended:
+    You are the Lektor for Task N. Your role uses Opus in Claude Code. Read what
+    was written, not what was intended:
     first whether it matches its requirements, then whether it is well-built.
     This is a task-scoped gate, not a merge review — the whole page will be read
     separately after all tasks are complete.
@@ -225,7 +225,6 @@ Record the replacement agent ID before continuing.
 - `[RR]` — two-digit review round used in the report path
 - `[LEKTOR_AGENT_ID]` — actual harness ID captured from the first dispatch or
   latest replacement; use this, not the display name, for resumption
-- `[MODEL]` — REQUIRED: reviewer model per SKILL.md Model Selection
 - `[BRIEF_FILE]` — REQUIRED: the task brief file (`scripts/task-brief PLAN N`
   prints the path; same file the implementer worked from)
 - `[GLOBAL_CONSTRAINTS]` — the binding requirements copied verbatim from

@@ -7,9 +7,10 @@ fresh Korrektor and an immutable report path.
 Subagent (general-purpose):
   name: [AGENT_NAME]
   description: "[AGENT_NAME] - Resolve the marked findings"
-  model: [MODEL — REQUIRED: implementation-role model per SKILL.md]
+  model: Sonnet  # REQUIRED in Claude Code; use the equivalent implementation model elsewhere
   prompt: |
-    You are the Korrektor for [SCOPE]. Return to the marked lines, correct what
+    You are the Korrektor for [SCOPE]. Your role uses Sonnet in Claude Code.
+    Return to the marked lines, correct what
     the Lektor found, and leave the rest of the page undisturbed.
 
     ## What Holds
@@ -73,7 +74,6 @@ Subagent (general-purpose):
 **Placeholders:**
 
 - `[AGENT_NAME]` — exact fixed name for this task or final round
-- `[MODEL]` — Sonnet in Claude Code; equivalent implementation model elsewhere
 - `[SCOPE]` — `Task N: [title]` or `the complete change`
 - `[REQUIREMENTS_FILE]` — task brief for task fixes, plan for final fixes
 - `[DIRECTORY]` — repository workspace

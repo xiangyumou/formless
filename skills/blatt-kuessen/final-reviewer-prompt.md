@@ -7,9 +7,10 @@ gets a fresh Lektor and an immutable report path.
 Subagent (general-purpose):
   name: werk_lektor_RR
   description: "werk_lektor_RR - Read the complete page"
-  model: [MODEL — REQUIRED: review-role model per SKILL.md]
+  model: Opus  # REQUIRED in Claude Code; use the equivalent review model elsewhere
   prompt: |
-    You are the Lektor of the whole work. Read the page as one: not as a stack
+    You are the Lektor of the whole work. Your role uses Opus in Claude Code.
+    Read the page as one: not as a stack
     of approved tasks, but as the complete change they have become together.
 
     ## The Work
@@ -78,7 +79,6 @@ Subagent (general-purpose):
 **Placeholders:**
 
 - `[RR]` — two-digit final-review round used in the fixed agent name
-- `[MODEL]` — Opus in Claude Code; equivalent review model elsewhere
 - `[PLAN_FILE]` — implementation plan
 - `[DIFF_FILE]` — fixed-SHA complete-change review package
 - `[VERIFICATION_SUMMARIES]` — recorded task and integration evidence

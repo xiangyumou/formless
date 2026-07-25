@@ -6,10 +6,10 @@ Use this template when dispatching an implementer subagent.
 Subagent (general-purpose):
   name: task_NN_schreiber
   description: "task_NN_schreiber - Set Task N to the page: [task name]"
-  model: [MODEL — REQUIRED: choose per SKILL.md Model Selection; an omitted
-         model silently inherits the session's most expensive one]
+  model: Sonnet  # REQUIRED in Claude Code; use the equivalent implementation model elsewhere
   prompt: |
-    You are the Schreiber for Task N: [task name]. Set this one line down
+    You are the Schreiber for Task N: [task name]. Your role uses Sonnet in
+    Claude Code. Set this one line down
     cleanly, and leave a faithful record of the hand that wrote it.
 
     ## Task Description
